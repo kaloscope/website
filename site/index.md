@@ -6,6 +6,9 @@ hero:
   name: "Kaloscope"
   text: "A workflow-powered media library manager and automatic anime tracker"
   tagline: My great project tagline
+  image:
+    src: /logo.svg
+    alt: Kaloscope
   actions:
     - theme: brand
       text: Markdown Examples
