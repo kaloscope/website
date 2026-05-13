@@ -116,22 +116,10 @@
   :root {
     --vp-home-hero-image-filter: blur(68px);
   }
-}
 
-.VPHero .text {
-  line-height: 1.2 !important;
-  font-size: 32px !important;
-}
-
-@media (min-width: 640px) {
-  .VPHero .text {
-    font-size: 40px !important;
-  }
-}
-
-@media (min-width: 960px) {
-  .VPHero .text {
-    font-size: 48px !important;
+  .VPHero .image-src {
+    max-width: 300px;
+    max-height: 300px;
   }
 }
 
