@@ -40,16 +40,18 @@
 
 大多数节点的字段值均支持 Jinja2 模板语法，可以引用上下文变量或对数据进行转换处理。
 
+::: v-pre
+
 **基本引用**
 
-```jinja2
+```jinja
 {{ title }}
 {{ results[0].url }}
 ```
 
 **过滤器**
 
-```jinja2
+```jinja
 {{ content | xpath_first('//title/text()') }}
 {{ ts | strftime('%Y-%m-%d') }}
 {{ magnet | prefix('magnet:?xt=urn:btih:') }}
@@ -90,7 +92,7 @@ Kaloscope 在标准 Jinja2 过滤器基础上注册了以下自定义过滤器�
 
 `jsonpath`、`xpath`、`regex` 三个智能过滤器均支持 `limit` 参数：
 
-```jinja2
+```jinja
 {{ obj | jsonpath('$.items[*]', 'first') }}   {# 强制返回第一个值 #}
 {{ obj | jsonpath('$.items[*]', 'all') }}     {# 强制返回列表 #}
 {{ obj | jsonpath('$.items[*]', 3) }}         {# 返回前 3 个，以列表返回 #}
@@ -104,6 +106,8 @@ Kaloscope 在标准 Jinja2 过滤器基础上注册了以下自定义过滤器�
 | `year` | `{{ ts \| year }}` | 从时间戳或日期字符串中提取 4 位年份整数 |
 | `duration` | `{{ ms \| duration }}` | 将时长转为可读格式（如 `01:23:45`），默认单位为毫秒，可传 `unit` 参数：`milliseconds`、`seconds`、`minutes` |
 | `parent_path` | `{{ path \| parent_path }}` | 获取路径的父目录，可传 `levels` 参数指定向上层数（默认 1） |
+
+:::
 
 ## 工作流仓库
 
