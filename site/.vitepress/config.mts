@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Kaloscope',
-  description: '以可视化工作流驱动的媒体库管理与自动追番工具',
+  description: '以可视化工作流驱动的本地媒体库管理工具',
   cleanUrls: true,
   lastUpdated: true,
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],

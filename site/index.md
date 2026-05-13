@@ -25,3 +25,15 @@ features:
   - title: 本地优先
     details: Docker 一键部署，多用户权限隔离，支持 PWA 安装，适合 NAS 和家庭媒体服务器。
 ---
+
+<script setup>
+import { onMounted } from 'vue'
+import { data as release } from './.vitepress/data/release.data'
+
+onMounted(() => {
+  const btn = document.querySelector('a.VPButton.brand[href*="kaloscope/kaloscope"]')
+  if (btn && release.version) {
+    btn.textContent = `立即部署 ${release.version}`
+  }
+})
+</script>
