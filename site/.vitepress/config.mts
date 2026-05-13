@@ -16,7 +16,7 @@ export default defineConfig({
 
     nav: [
       { text: '首页', link: '/' },
-      { text: '文档', link: '/docs/' }
+      { text: '文档', link: '/docs/getting-started' }
     ],
 
     sidebar: [

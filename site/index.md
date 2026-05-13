@@ -15,7 +15,7 @@ hero:
       link: https://hub.docker.com/r/kaloscope/kaloscope
     - theme: alt
       text: 查看文档
-      link: /docs/
+      link: /docs/getting-started
 
 features:
   - title: 工作流驱动
