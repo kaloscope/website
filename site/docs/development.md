@@ -1,48 +1,44 @@
-# 开发指南
+# 参与开发
 
-本页面向希望参与 Kaloscope 开发或进行二次扩展的用户。
+本页面向希望参与 Kaloscope 开发或进行二次扩展的开发者。
 
-## 技术栈概览
+## 技术栈
 
-根据 README 与项目徽章，可以确认主要技术栈包括：
-
-- 前端：Svelte
-- 工作流画布：xyflow
-- 后端：Sanic
-- 语言：Python 3.13+
+| 层 | 技术 |
+| --- | --- |
+| 前端框架 | [Svelte 5](https://svelte.dev/) |
+| 工作流画布 | [xyflow](https://xyflow.com/) |
+| 后端框架 | [Sanic](https://sanic.dev/) |
+| ORM | [Tortoise ORM](https://tortoise.github.io/) |
+| 语言 | Python 3.13+ |
+| 包管理 | Poetry（后端）、pnpm（前端） |
 
 ## 项目结构
 
-README 中给出的结构摘要如下：
-
 ```text
-frontend/
-  src/routes/
-  src/lib/
-  static/
-
-backend/app/
-  main.py
-  routes/
-  services/
-  models/
-  utils/
-  core/
-    dl/
-    flow/
-    media/
+kaloscope/
+├── frontend/
+│   ├── src/
+│   │   ├── routes/         # 页面路由（SvelteKit）
+│   │   └── lib/            # 组件与工具库
+│   └── static/             # 静态资源
+└── backend/
+    └── app/
+        ├── main.py         # 应用入口
+        ├── config.toml     # 配置文件
+        ├── routes/         # API 路由层
+        ├── services/       # 业务逻辑层
+        ├── models/         # 数据模型
+        ├── utils/          # 工具函数
+        └── core/
+            ├── flow/       # 工作流引擎
+            ├── media/      # 媒体库管理
+            └── dl/         # 下载器适配
 ```
 
-从命名上看：
+## 本地启动
 
-- `routes/` 主要承载接口层
-- `services/` 负责业务逻辑
-- `models/` 负责数据模型
-- `core/flow/`、`core/media/`、`core/dl/` 分别对应工作流、媒体库和下载相关核心能力
-
-## 本地开发流程
-
-### 后端
+**后端**
 
 ```bash
 cd backend
@@ -50,13 +46,21 @@ poetry install
 poetry run sanic app.main:app --fast --reload --debug
 ```
 
-### 前端
+**前端**（另开终端）
 
 ```bash
 cd frontend
 pnpm install
 pnpm run dev
 ```
+
+前后端均启动后，访问 `http://localhost:5173/` 进入开发界面。
+
+## 贡献指南
+
+欢迎通过 [GitHub](https://github.com/kaloscope/kaloscope) 提交 Issue 或 Pull Request。提交前请先阅读项目根目录中的 README 与许可证说明。
+
+工作流社区模板请向 [workflows 仓库](https://github.com/kaloscope/workflows) 提交。
 
 ## 建议补充的开发文档
 

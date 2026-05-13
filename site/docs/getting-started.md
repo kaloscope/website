@@ -2,38 +2,44 @@
 
 本页提供最短路径的上手方式，适合第一次体验 Kaloscope。
 
-## 前置要求
+## 推荐方式：Docker 部署
 
-使用源码运行时，建议先准备以下环境：
+最简单的方式是通过 Docker 运行，无需配置 Python 和 Node.js 环境：
 
-- Git
-- Python 3.13+
-- Node.js
-- Poetry
-- pnpm
+```bash
+docker run -d \
+  --name kaloscope \
+  -e ENABLE_ARIA2=true \
+  -v $(pwd)/workspace:/workspace \
+  -p 8000:8000 \
+  -p 6888:6888 \
+  -p 6888:6888/udp \
+  --restart unless-stopped \
+  kaloscope/kaloscope:latest
+```
 
-如果你更倾向于容器部署，可以直接阅读 [Docker 部署](/docs/docker)。
+启动后访问 `http://localhost:8000`，首次进入需要创建管理员账号。
 
-## 5 分钟上手流程
-
-1. 克隆项目代码。
-2. 启动后端服务。
-3. 启动前端开发服务器。
-4. 打开浏览器访问应用。
-5. 首次使用时创建管理员账号。
+完整的部署配置（含 Docker Compose 示例和环境变量说明）请参见[本地部署](/docs/deployment)。
 
 ## 源码启动
+
+如需在本地开发环境运行，需要预先安装 Git、Python 3.13+、Node.js、Poetry 和 pnpm。
 
 ```bash
 git clone https://github.com/kaloscope/kaloscope.git
 cd kaloscope
+```
 
+**启动后端：**
+
+```bash
 cd backend
 poetry install
 poetry run sanic app.main:app --fast --reload --debug
 ```
 
-另开一个终端：
+**启动前端**（另开终端）：
 
 ```bash
 cd frontend
@@ -41,18 +47,18 @@ pnpm install
 pnpm run dev
 ```
 
-默认前端开发地址为 `http://localhost:5173/`。
+访问 `http://localhost:5173/` 进入开发界面。
 
-## 首次进入后建议完成的事项
+## 初始配置
 
-- 创建管理员账号
-- 新建或导入工作流仓库
-- 配置至少一个索引器工作流
-- 配置下载器
-- 创建媒体库并绑定目录
+账号创建完成后，建议按顺序完成以下配置：
 
-## 下一步阅读
+1. **设置 → 下载器**：添加下载器连接（aria2 / qBittorrent / Transmission）
+2. **设置 → 工作流**：导入或新建工作流仓库，配置索引器
+3. **设置 → 媒体库**：添加媒体库根目录
 
-- [安装与运行](/docs/installation)
-- [工作流系统](/docs/workflows)
-- [下载与搜索](/docs/search-and-download)
+## 下一步
+
+- [工作流](/docs/workflows)
+- [资源搜索](/docs/websearch)
+- [下载管理](/docs/downloads)

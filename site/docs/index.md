@@ -2,35 +2,27 @@
 
 欢迎来到 Kaloscope 文档。
 
-本文档站面向两类读者：
+## 开始使用
 
-- 想快速了解项目定位、功能边界与部署方式的普通使用者
-- 想二次开发工作流、扩展下载器或参与前后端开发的贡献者
+| 页面 | 说明 |
+| --- | --- |
+| [项目简介](/docs/introduction) | 了解 Kaloscope 的定位、核心理念与适用场景 |
+| [快速开始](/docs/getting-started) | Docker 一键启动或源码运行的最短路径 |
+| [本地部署](/docs/deployment) | Docker Compose 完整配置、环境变量说明与端口映射 |
 
-## 阅读建议
+## 功能说明
 
-如果你是第一次接触 Kaloscope，建议按下面顺序阅读：
+| 页面 | 说明 |
+| --- | --- |
+| [工作流](/docs/workflows) | 编辑器界面、节点类型、Jinja2 模板与自定义 Filter |
+| [资源搜索](/docs/websearch) | 索引器配置、关键词搜索与全局搜索 |
+| [媒体库](/docs/medialibs) | 文件扫描、NFO 元数据解析与在线播放 |
+| [下载管理](/docs/downloads) | 下载器配置、手动添加任务与自动下载计划 |
+| [系统设置](/docs/settings) | 用户管理、网络代理与个人偏好 |
 
-1. [项目简介](/docs/introduction)
-2. [快速开始](/docs/getting-started)
-3. [安装与运行](/docs/installation)
-4. [Docker 部署](/docs/docker)
+## 其它
 
-如果你想进一步了解能力边界和系统设计，可以继续阅读：
-
-- [工作流系统](/docs/workflows)
-- [媒体库管理](/docs/media-library)
-- [下载与搜索](/docs/search-and-download)
-- [播放器与用户系统](/docs/player-and-users)
-
-如果你准备自行扩展或参与开发：
-
-- [配置说明](/docs/configuration)
-- [开发指南](/docs/development)
-- [常见问题](/docs/faq)
-
-## 文档约定
-
-- 本站以中文为主，术语尽量与项目界面保持一致
-- 对于 README 和现有代码中已明确的信息，文档会直接给出可执行说明
-- 对于仍在演进中的功能，文档会先保留目录和接口，后续再逐步补充细节
+| 页面 | 说明 |
+| --- | --- |
+| [参与开发](/docs/development) | 技术栈、项目结构与本地开发流程 |
+| [常见问题](/docs/faq) | 常见问题与故障排查 |

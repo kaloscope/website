@@ -23,27 +23,25 @@ export default defineConfig({
       {
         text: '开始使用',
         items: [
-          { text: '文档总览', link: '/docs/' },
           { text: '项目简介', link: '/docs/introduction' },
           { text: '快速开始', link: '/docs/getting-started' },
-          { text: '安装与运行', link: '/docs/installation' }
+          { text: '本地部署', link: '/docs/deployment' }
         ]
       },
       {
-        text: '核心功能',
+        text: '功能说明',
         items: [
-          { text: '工作流系统', link: '/docs/workflows' },
-          { text: '媒体库管理', link: '/docs/media-library' },
-          { text: '下载与搜索', link: '/docs/search-and-download' },
-          { text: '播放器与用户系统', link: '/docs/player-and-users' }
+          { text: '工作流', link: '/docs/workflows' },
+          { text: '资源搜索', link: '/docs/websearch' },
+          { text: '媒体库', link: '/docs/medialibs' },
+          { text: '下载管理', link: '/docs/downloads' },
+          { text: '系统设置', link: '/docs/settings' }
         ]
       },
       {
-        text: '部署与开发',
+        text: '其它',
         items: [
-          { text: 'Docker 部署', link: '/docs/docker' },
-          { text: '配置说明', link: '/docs/configuration' },
-          { text: '开发指南', link: '/docs/development' },
+          { text: '参与开发', link: '/docs/development' },
           { text: '常见问题', link: '/docs/faq' }
         ]
       }
