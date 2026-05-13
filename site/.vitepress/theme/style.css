@@ -124,6 +124,27 @@
 }
 
 /**
+ * Component: Feature Card
+ * -------------------------------------------------------------------------- */
+
+.VPFeature .box {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.VPFeature .box .VPImage {
+  margin-bottom: 0 !important;
+  width: 32px;
+  height: 32px;
+}
+
+.VPFeature .box .title {
+  flex: 1;
+}
+
+/**
  * Component: Custom Block
  * -------------------------------------------------------------------------- */
 
