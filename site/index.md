@@ -14,7 +14,7 @@ hero:
       text: 立即部署
       link: https://hub.docker.com/r/kaloscope/kaloscope
     - theme: alt
-      text: 查看文档
+      text: 快速开始
       link: /docs/getting-started
 
 features:
