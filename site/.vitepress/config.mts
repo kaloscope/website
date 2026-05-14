@@ -41,8 +41,8 @@ export default defineConfig({
       {
         text: '其它',
         items: [
-          { text: '参与开发', link: '/docs/development' },
-          { text: '常见问题', link: '/docs/faq' }
+          { text: '常见问题', link: '/docs/faq' },
+          { text: '参与开发', link: '/docs/development' }
         ]
       }
     ],
