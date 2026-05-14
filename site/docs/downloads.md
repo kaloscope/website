@@ -2,11 +2,11 @@
 
 ## 支持的下载器
 
-| 下载器 | 接口方式 | 默认地址 |
-| --- | --- | --- |
-| [aria2](https://aria2.github.io/) | JSON-RPC | `http://127.0.0.1:6800/jsonrpc` |
-| [qBittorrent](https://www.qbittorrent.org/) | WebUI API | `http://127.0.0.1:8080/api/v2` |
-| [Transmission](https://transmissionbt.com/) | RPC | `http://127.0.0.1:9091/transmission/rpc` |
+| 下载器                                      | 接口方式  | 默认地址                                 |
+| ------------------------------------------- | --------- | ---------------------------------------- |
+| [aria2](https://aria2.github.io/)           | JSON-RPC  | `http://127.0.0.1:6800/jsonrpc`          |
+| [qBittorrent](https://www.qbittorrent.org/) | WebUI API | `http://127.0.0.1:8080/api/v2`           |
+| [Transmission](https://transmissionbt.com/) | RPC       | `http://127.0.0.1:9091/transmission/rpc` |
 
 ## 配置下载器
 

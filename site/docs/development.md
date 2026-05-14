@@ -2,14 +2,14 @@
 
 ## 技术栈
 
-| 层 | 技术 |
-| --- | --- |
-| 前端框架 | [Svelte 5](https://svelte.dev/) |
-| 工作流画布 | [xyflow](https://xyflow.com/) |
-| 后端框架 | [Sanic](https://sanic.dev/) |
-| ORM | [Tortoise ORM](https://tortoise.github.io/) |
-| 语言 | Python 3.13+ |
-| 包管理 | Poetry（后端）、pnpm（前端） |
+| 层         | 技术                                        |
+| ---------- | ------------------------------------------- |
+| 前端框架   | [Svelte 5](https://svelte.dev/)             |
+| 工作流画布 | [xyflow](https://xyflow.com/)               |
+| 后端框架   | [Sanic](https://sanic.dev/)                 |
+| ORM        | [Tortoise ORM](https://tortoise.github.io/) |
+| 语言       | Python 3.13+                                |
+| 包管理     | Poetry（后端）、pnpm（前端）                |
 
 ## 项目结构
 

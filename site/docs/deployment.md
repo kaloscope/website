@@ -1,8 +1,35 @@
 # 本地部署
 
-推荐使用 Docker 部署，镜像已发布至 [Docker Hub](https://hub.docker.com/r/kaloscope/kaloscope)。
+推荐使用 Docker 部署，镜像已发布至 [Docker Hub](https://hub.docker.com/r/kaloscope/kaloscope) 和 [GitHub Container Registry](https://github.com/kaloscope/kaloscope/pkgs/container/kaloscope)。
 
-## Docker Compose（推荐）
+## Docker CLI
+
+通过命令行直接拉取并运行单个 Kaloscope 容器的示例：
+
+```bash
+docker run -d \
+  --name kaloscope \
+  --add-host=host.docker.internal:host-gateway \
+  -e PUID=1026 \
+  -e PGID=100 \
+  -e UMASK=022 \
+  -e TZ=Asia/Shanghai \
+  -e AUTO_TLS=true \
+  -e TLS_HOSTNAME=192.168.31.2 \
+  -e ENABLE_ARIA2=true \
+  -v /volume1/kaloscope/workspace:/workspace \
+  -v /volume1/kaloscope/downloads:/downloads \
+  -v /volume1/kaloscope/animes:/animes \
+  -p 8000:8000 \
+  -p 6888:6888 \
+  -p 6888:6888/udp \
+  --restart unless-stopped \
+  kaloscope/kaloscope:latest
+```
+
+## Docker Compose
+
+通过创建 `docker-compose.yml` 文件，同时部署 Kaloscope 与 qBittorrent 的示例：
 
 ```yaml
 services:
@@ -16,10 +43,9 @@ services:
       - PGID=100
       - UMASK=022
       - TZ=Asia/Shanghai
-      - AUTO_TLS=false
-      - TLS_HOSTNAME=192.168.31.100
+      - AUTO_TLS=true
+      - TLS_HOSTNAME=192.168.31.2
       - ENABLE_ARIA2=true
-      - DEBUG_MODE=false
     volumes:
       - /volume1/kaloscope/workspace:/workspace
       - /volume1/kaloscope/downloads:/downloads
@@ -47,66 +73,51 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
-networks:
-  default:
-    external:
-      name: syno
-```
-
-- `extra_hosts: host.docker.internal:host-gateway`：允许容器访问宿主机上的服务
-- `networks.default.external.name: syno`：Synology 自定义网络，普通 Docker 环境可删除该节点
-- `/workspace`：持久化数据目录，存放数据库、缓存与工作流仓库
-- qBittorrent 与 Kaloscope 共享 `downloads` 目录，下载完成后可直接扫描入库
-
-```bash
-docker compose up -d
-```
-
-## Docker CLI
-
-```bash
-docker run -d \
-  --name kaloscope \
-  --add-host=host.docker.internal:host-gateway \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e UMASK=022 \
-  -e TZ=Asia/Shanghai \
-  -e AUTO_TLS=false \
-  -e ENABLE_ARIA2=true \
-  -v /path/to/workspace:/workspace \
-  -v /path/to/downloads:/downloads \
-  -p 8000:8000 \
-  -p 6888:6888 \
-  -p 6888:6888/udp \
-  --restart unless-stopped \
-  kaloscope/kaloscope:latest
 ```
 
 ## 环境变量
 
-| 变量名 | 默认值 | 说明 |
-| --- | --- | --- |
-| `PUID` | `0` | 进程运行 UID，NAS 环境建议设为媒体目录所有者 |
-| `PGID` | `0` | 进程运行 GID |
-| `UMASK` | `022` | 文件创建掩码 |
-| `TZ` | 系统默认 | 时区，如 `Asia/Shanghai` |
-| `AUTO_TLS` | `false` | 启用 [mkcert](https://github.com/FiloSottile/mkcert) 自动签发本地 TLS 证书，CA 存储于 `/workspace/mkcert`，适合局域网 HTTPS |
-| `TLS_HOSTNAME` | 空 | TLS 证书绑定的主机名或 IP |
-| `ENABLE_ARIA2` | `false` | 在容器内启动内置 aria2，RPC 端口 `6800`（仅容器内），BT 监听端口 `6888` |
-| `DEBUG_MODE` | `false` | 以 Sanic debug 模式启动 |
+容器支持通过以下环境变量进行配置：
 
-## 端口说明
+| 变量名         | 默认值  | 说明                                                                                                        |
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------------- |
+| `PUID`         | `0`     | 进程运行 UID，NAS 环境建议设为媒体目录所有者                                                                |
+| `PGID`         | `0`     | 进程运行 GID，NAS 环境建议设为媒体目录所属用户组                                                            |
+| `UMASK`        | `022`   | 文件创建掩码，影响容器内新建文件的默认权限                                                                  |
+| `TZ`           | 无      | 容器时区，如 `Asia/Shanghai`、`UTC` 等                                                                      |
+| `AUTO_TLS`     | `false` | 使用 [mkcert](https://github.com/FiloSottile/mkcert) 自动签发本地 TLS 证书，适合需要局域网 HTTPS 访问的用户 |
+| `TLS_HOSTNAME` | 无      | 指定 TLS 证书绑定的主机名或 IP，`AUTO_TLS=true` 时生效                                                      |
+| `ENABLE_ARIA2` | `false` | 在容器内启动内置的 aria2 服务，适合不想单独部署下载器的用户                                                 |
+| `DEBUG_MODE`   | `false` | 以 DEBUG 模式启动，会输出更多日志，普通用户不需要开启                                                       |
 
-| 端口 | 协议 | 用途 |
-| --- | --- | --- |
-| `8000` | TCP | Web 服务 |
-| `6888` | TCP/UDP | 内置 aria2 BT 监听（仅 `ENABLE_ARIA2=true` 时需要） |
+## 端口映射
 
-## 首次启动
+容器需要映射以下端口以提供服务：
 
-访问 `http://<宿主机IP>:8000` 创建管理员账号，然后：
+| 端口   | 协议    | 说明                                                               |
+| ------ | ------- | ------------------------------------------------------------------ |
+| `8000` | TCP     | Kaloscope Web UI 访问端口                                          |
+| `6888` | TCP/UDP | 内置 aria2 DHT 与 BT 监听端口（仅 `ENABLE_ARIA2=true` 时需要映射） |
 
-1. **设置 → 下载器**：添加下载器
-2. **设置 → 工作流**：导入或创建索引器工作流
-3. **设置 → 媒体库**：添加媒体库根目录
+## 数据卷
+
+Dockerfile 唯一声明的持久化目录是 `/workspace`，**必须挂载**，以保证容器重启后数据不丢失。该目录结构如下：
+
+| 容器内路径                | 说明                                                 |
+| ------------------------- | ---------------------------------------------------- |
+| `/workspace`              | 主数据目录                                           |
+| `/workspace/database`     | sqlite 数据库文件目录                                |
+| `/workspace/repositories` | 工作流仓库目录                                       |
+| `/workspace/images`       | 图片缓存目录                                         |
+| `/workspace/mkcert`       | mkcert 根 CA 证书目录（`AUTO_TLS=true` 时自动创建）  |
+| `/workspace/aria2`        | aria2 会话文件目录（`ENABLE_ARIA2=true` 时自动创建） |
+
+下载文件目录（如 `/downloads`）和媒体库目录（如 `/animes`）等没有在 Dockerfile 中显式声明，按需挂载即可。
+
+::: info 硬链接支持
+若下载目录与媒体库目录分别映射为两个独立的宿主机路径，跨挂载点的硬链接将无法创建，转移文件时会自动降级为软链接。有硬链接需求的用户，建议将下载目录与媒体库目录统一挂载在同一个宿主机路径下（例如同属 `/volume1/media`），确保二者位于同一文件系统。
+:::
+
+::: info 外部下载器目录映射
+使用 qBittorrent 等外部下载器时，需确保下载器容器与 Kaloscope 容器对下载目录的映射路径完全一致。例如两边均挂载同一宿主机路径 `/volume1/downloads` 到容器内的 `/downloads`，否则 Kaloscope 将无法找到下载完成的文件。
+:::
