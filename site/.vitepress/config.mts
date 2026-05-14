@@ -33,8 +33,8 @@ export default defineConfig({
         items: [
           { text: '工作流', link: '/docs/workflows' },
           { text: '资源搜索', link: '/docs/websearch' },
-          { text: '媒体库', link: '/docs/medialibs' },
           { text: '下载管理', link: '/docs/downloads' },
+          { text: '媒体库', link: '/docs/medialibs' },
           { text: '系统设置', link: '/docs/settings' }
         ]
       },
