@@ -13,7 +13,7 @@
 
 Kaloscope 从 [NFO 文件](https://kodi.wiki/view/NFO_files) 读取元数据，包括标题、简介、评分、年份、演员、导演、标签、海报等。
 
-NFO 文件需与媒体文件同名（仅扩展名不同），或按 Kodi 命名规范放置。也可通过工作流自动生成 NFO 文件（参见[工作流 → NFO 节点](/docs/workflows#nfo-节点类型)）。
+NFO 文件需与媒体文件同名（仅扩展名不同），或按 Kodi 命名规范放置。也可通过工作流自动生成 NFO 文件（参见[工作流 → 节点类型](/docs/workflows/#节点类型)）。
 
 ## 在线播放
 

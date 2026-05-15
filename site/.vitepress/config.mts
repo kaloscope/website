@@ -34,7 +34,15 @@ export default defineConfig({
       {
         text: '功能说明',
         items: [
-          { text: '工作流', link: '/docs/workflows' },
+          {
+            text: '工作流',
+            link: '/docs/workflows/',
+            items: [
+              { text: '流程模板', link: '/docs/workflows/templates' },
+              { text: '全局变量', link: '/docs/workflows/variables' },
+              { text: '定时调度', link: '/docs/workflows/schedule' }
+            ]
+          },
           {
             text: '资源搜索',
             link: '/docs/websearch/',
