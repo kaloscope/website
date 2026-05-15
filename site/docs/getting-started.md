@@ -13,5 +13,5 @@
 登录成功后，建议按顺序完成以下配置：
 
 - [配置工作流](/docs/workflows)：导入工作流仓库，配置索引器与刮削逻辑
-- [添加下载器](/docs/downloads)：连接 aria2、qBittorrent 或 Transmission
+- [添加下载器](/docs/downloads/)：连接 aria2、qBittorrent 或 Transmission
 - [创建媒体库](/docs/medialibs)：指定媒体文件的根目录，开始扫描入库

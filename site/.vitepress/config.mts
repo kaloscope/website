@@ -35,10 +35,21 @@ export default defineConfig({
         text: '功能说明',
         items: [
           { text: '工作流', link: '/docs/workflows' },
-          { text: '资源搜索', link: '/docs/websearch' },
-          { text: '下载管理', link: '/docs/downloads' },
+          {
+            text: '资源搜索',
+            link: '/docs/websearch/',
+            items: [{ text: '全局搜索', link: '/docs/websearch/global' }]
+          },
+          {
+            text: '下载管理',
+            link: '/docs/downloads/',
+            items: [{ text: '下载计划', link: '/docs/downloads/plans' }]
+          },
           { text: '媒体库', link: '/docs/medialibs' },
-          { text: '系统设置', link: '/docs/settings' }
+          { text: '弹幕设置', link: '/docs/danmaku' },
+          { text: '网络设置', link: '/docs/network' },
+          { text: '用户管理', link: '/docs/users' },
+          { text: 'PWA 安装', link: '/docs/pwa' }
         ]
       },
       {
