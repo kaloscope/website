@@ -12,7 +12,7 @@ repos:
       - id: check-added-large-files
         args: ['--maxkb=5120']
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.15.1
+    rev: v4.16.2
     hooks:
       - id: commitizen
         stages: [commit-msg]
