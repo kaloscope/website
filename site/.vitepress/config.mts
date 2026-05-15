@@ -57,7 +57,7 @@ export default defineConfig({
           { text: '弹幕设置', link: '/docs/danmaku' },
           { text: '网络设置', link: '/docs/network' },
           { text: '用户管理', link: '/docs/users' },
-          { text: 'PWA 安装', link: '/docs/pwa' }
+          { text: '安装 PWA', link: '/docs/pwa' }
         ]
       },
       {

@@ -2,7 +2,7 @@
 
 ## 第一步：部署服务
 
-参考[部署指南](/docs/deployment)完成本地部署，推荐使用 [Docker Compose](/docs/deployment#docker-compose) 方式同时部署 Kaloscope 与下载器。
+参考[部署指南](./deployment)完成本地部署，推荐使用 [Docker Compose](./deployment#docker-compose) 方式同时部署 Kaloscope 与下载器。
 
 ## 第二步：访问页面
 
@@ -12,6 +12,6 @@
 
 登录成功后，建议按顺序完成以下配置：
 
-- [配置工作流](/docs/workflows/)：导入工作流仓库，配置索引器与刮削逻辑
-- [添加下载器](/docs/downloads/)：连接 aria2、qBittorrent 或 Transmission
-- [创建媒体库](/docs/medialibs)：指定媒体文件的根目录，开始扫描入库
+- [配置工作流](./workflows/templates)：导入工作流仓库，配置索引器与刮削逻辑
+- [添加下载器](./downloads/index)：连接 aria2、qBittorrent 或 Transmission
+- [创建媒体库](./medialibs)：指定媒体文件的根目录，开始扫描入库
