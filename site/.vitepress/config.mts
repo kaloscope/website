@@ -12,7 +12,10 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     logo: { src: '/favicon.ico', width: 24, height: 24 },
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/kaloscope' }],
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/kaloscope' },
+      { icon: 'telegram', link: 'https://t.me/kaloscope_official' }
+    ],
 
     nav: [
       { text: '首页', link: '/' },

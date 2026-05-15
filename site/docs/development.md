@@ -76,7 +76,7 @@ kaloscope/
 
 ## 贡献指南
 
-欢迎通过 [GitHub](https://github.com/kaloscope/kaloscope) 提交 Issue 或 Pull Request。工作流社区模板请向 [workflows](https://github.com/kaloscope/workflows) 仓库提交。
+欢迎通过 [GitHub](https://github.com/kaloscope/kaloscope) 提交 Issue 或 Pull Request。工作流模板请向 [workflows](https://github.com/kaloscope/workflows) 仓库提交。
 
 ### 提交 Issue
 
