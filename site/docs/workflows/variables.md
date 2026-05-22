@@ -5,6 +5,8 @@
 - 支持按变量名进行筛选
 - 变量名支持一键复制，方便在工作流字段中直接引用
 
+![global-variable](/screenshots/global-variable.png)
+
 ## 新增变量
 
 在**全局变量**页面点击右上角「新增变量」，填写以下字段：

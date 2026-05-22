@@ -5,6 +5,8 @@
 - 实时监控根目录文件系统变动，新增文件后自动触发入库
 - 一个媒体库对应一个根目录，适合按电影、剧集等类型拆分管理
 
+![new-medialib](/screenshots/new-medialib.png)
+
 ## 创建媒体库
 
 在**媒体库管理**页面点击「新增」，填写以下字段：
@@ -28,6 +30,8 @@ Kaloscope 从 [NFO 文件](http://wikipedia.org/wiki/.nfo) 读取元数据，包
 ## 在线播放
 
 点击媒体文件在内置播放器中播放，支持 FLV、HLS、MP4，可叠加弹幕，进度自动保存。剧集或多分段资源会显示分集列表，方便连续播放。
+
+![css-fullscreen](/screenshots/css-fullscreen.jpg)
 
 ## 目录结构建议
 

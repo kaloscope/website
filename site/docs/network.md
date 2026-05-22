@@ -7,6 +7,8 @@
 - 分别控制是否启用 DNS 或代理
 - 通过规则顺序决定匹配优先级
 
+![network-rules](/screenshots/network-rules.png)
+
 ## 作用范围
 
 网络规则对服务端发起的**所有 HTTP 请求**均生效，包括：

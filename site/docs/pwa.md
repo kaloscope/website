@@ -2,6 +2,8 @@
 
 渐进式 Web 应用（Progressive Web App，PWA）是一种可安装到设备的 Web 应用形态。安装后，Kaloscope 会以独立窗口运行，拥有单独的图标和任务栏入口，体验更接近原生应用。
 
+![pwa-desktop](/screenshots/pwa-desktop.png)
+
 ## HTTPS 要求
 
 浏览器通常要求 PWA 在 HTTPS 下才能安装。如果你已经为 Kaloscope 配置了有效的 TLS 证书（通过反向代理或其他方式），则可以直接跳到“[安装 PWA](#安装-pwa)”部分。
