@@ -18,3 +18,13 @@
 - 匹配成功后，弹幕会缓存到本地，后续播放可直接复用
 
 ![danmaku-match](/screenshots/danmaku-match.png)
+
+## 弹幕服务器
+
+你可以选择自己搭建弹幕服务器，也可以直接使用官方提供的`弹弹play API`代理接口，填入后即可直接用于弹幕匹配、搜索和加载：
+
+```
+https://danmaku.kaloscope.org
+```
+
+![danmaku-server](/screenshots/danmaku-server.png)
