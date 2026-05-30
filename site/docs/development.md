@@ -85,9 +85,12 @@ kaloscope/
 
 ### 提交 Pull Request
 
-- PR 请基于 `main` 分支创建，合并目标也为 `main`
-- 保持每个 PR 聚焦于单一功能或修复，便于 Review
-- 向主仓库提交 PR 前请确保完成以下检查：
-  - 已安装 [pre-commit](https://pre-commit.com/) hooks，提交时会自动执行代码格式化
-  - 修改了后端代码：所有单元测试通过（`cd backend && poetry run pytest -v`）
-  - 修改了前端代码：lint 与类型检查通过（`cd frontend && pnpm run lint && pnpm run check`）
+1. 从 `main` 分支创建功能分支，分支名建议使用 `feature/xxx` 或 `fix/xxx` 格式
+2. 在分支上进行开发，完成后推送到你 Fork 的仓库
+3. 在 GitHub 上发起 Pull Request，合并目标选择主仓库的 `main` 分支
+4. PR 标题和描述请清晰说明改了什么、为什么这样改
+5. 每个 PR 应聚焦于单一功能或修复，保持改动范围小且专注，便于 Review
+6. 提交前请确保完成以下检查：
+   - 已安装 [pre-commit](https://pre-commit.com/) hooks，提交时会自动执行代码格式化与检查
+   - 修改了后端代码：所有单元测试通过（`cd backend && poetry run pytest -v`）
+   - 修改了前端代码：lint 与类型检查通过（`cd frontend && pnpm run lint && pnpm run check`）
