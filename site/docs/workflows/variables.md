@@ -5,7 +5,7 @@
 - 支持按变量名进行筛选
 - 变量名支持一键复制，方便在工作流字段中直接引用
 
-![global-variable](/screenshots/global-variable.png)
+![new-variable](/screenshots/new-variable.png)
 
 ## 新增变量
 

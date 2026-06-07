@@ -27,4 +27,4 @@
 https://danmaku.kaloscope.org
 ```
 
-![danmaku-server](/screenshots/danmaku-server.png)
+![new-medialib](/screenshots/new-medialib.png)
