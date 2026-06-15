@@ -71,6 +71,7 @@ kaloscope/
 └── workspace/                  # 运行时数据
     ├── database/               # 数据库
     ├── images/                 # 图片缓存
+    ├── transcoded/             # 转码目录
     └── repositories/           # 工作流仓库
 ```
 
