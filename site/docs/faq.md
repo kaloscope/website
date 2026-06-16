@@ -47,6 +47,7 @@ services:
       - WATCHTOWER_CLEANUP=true           # 更新后删除旧镜像
       - WATCHTOWER_POLL_INTERVAL=86400    # 检查间隔（秒）
       - WATCHTOWER_LABEL_ENABLE=true      # 仅更新带有启用标签的容器
+      - DOCKER_API_VERSION=1.44           # 可选：指定 Docker API 版本
     restart: unless-stopped
 ```
 
@@ -72,15 +73,16 @@ Jellyfin 等工具专注于媒体播放与流媒体分发。Kaloscope 的差异�
 
 ## 连接宿主机下载器时，容器内下载路径和宿主机路径不一致
 
-当 Kaloscope 以容器方式运行，而下载器部署在宿主机时，两边看到的下载目录路径可能不同。例如容器内 `/downloads` 对应宿主机 `/data/downloads`。
+::: v-pre
+当 Kaloscope 以容器方式运行，而下载器部署在宿主机时，两边看到的下载目录路径可能不同，从而导致下载失败。例如容器内 `/downloads` 对应宿主机 `/data/downloads`。
 
-以 qBittorrent 为例，配置文件中有两处 `savepath` 使用 `{{dir}}` 变量，分别对应磁力链接（`add_link`）和种子文件（`add_torrent`）的下载路径：
+该问题可以通过固定下载路径来解决。以 qBittorrent 为例，配置文件中有两处 `savepath` ，分别对应磁力链接和种子文件的下载路径：
 
 ```yaml
 methods:
   add_link:
     form:
-      savepath: '{{dir}}' # 改为宿主机路径，如 '/data/downloads'
+      savepath: '{{dir}}' # 改为宿主机路径，如 /data/downloads
       urls: '{{link}}'
   add_torrent:
     form:
@@ -88,4 +90,5 @@ methods:
       torrents: '{{torrent}}'
 ```
 
-将这两处 `{{dir}}` 替换为**宿主机的绝对路径**，下载器就能正确识别。该方案无需额外配置软链接或远程路径映射。
+将这两处配置中的 `{{dir}}` 替换为**宿主机中的绝对路径**，下载器就能直接使用宿主机路径进行下载。
+:::
