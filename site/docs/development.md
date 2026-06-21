@@ -37,7 +37,7 @@ pnpm install
 pnpm run dev
 ```
 
-4. 前后端均启动后，浏览器访问 `http://localhost:5173/` 即可进入应用界面，首次使用需创建管理员账号
+4. 前后端均启动后，浏览器访问`http://localhost:5173/`即可进入应用界面，首次使用需创建管理员账号
 
 ### 项目结构
 
@@ -88,9 +88,9 @@ kaloscope/
 
 ### 提交 Pull Request
 
-1. 从 `main` 分支创建功能分支，分支名建议使用 `feature/xxx` 或 `fix/xxx` 格式
+1. 从`main`分支创建功能分支，分支名建议使用`feature/xxx`或`fix/xxx`格式
 2. 在分支上进行开发，完成后推送到你 Fork 的仓库
-3. 在 GitHub 上发起 Pull Request，合并目标选择主仓库的 `main` 分支
+3. 在 GitHub 上发起 Pull Request，合并目标选择主仓库的`main`分支
 4. PR 标题和描述请清晰说明改了什么、为什么这样改
 5. 每个 PR 应聚焦于单一功能或修复，保持改动范围小且专注，便于 Review
 6. 提交前请确保完成以下检查：

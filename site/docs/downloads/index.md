@@ -41,7 +41,7 @@
 | [Transmission](https://github.com/transmission/transmission/blob/4.0.6/docs/rpc-spec.md)     | RPC       | `http://127.0.0.1:9091/transmission/rpc` |
 
 ::: tip 服务地址
-Docker 部署时，宿主机上的下载服务可以通过 `http://host.docker.internal:<端口>` 访问，同一个 Docker 网络内的下载服务可以通过 `http://<容器名称>:<端口>` 访问。
+Docker 部署时，宿主机上的下载服务可以通过`http://host.docker.internal:<端口>`访问，同一个 Docker 网络内的下载服务可以通过`http://<容器名称>:<端口>`访问。
 :::
 
 ## 手动添加

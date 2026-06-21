@@ -23,18 +23,18 @@ Docker 镜像内置了 [mkcert](https://github.com/FiloSottile/mkcert)，可通�
 | `AUTO_TLS=true`              | 启用自签名证书，服务启动时自动生成证书并启用 HTTPS   |
 | `TLS_HOSTNAME=<主机名或 IP>` | 指定 TLS 证书绑定的主机名或 IP，客户端通过该地址访问 |
 
-启用后，Kaloscope 会以 HTTPS 模式运行，mkcert 生成的根 CA 证书会保存在容器内的 `/workspace/mkcert` 目录，也就是宿主机挂载目录中的 `mkcert` 子目录。
+启用后，Kaloscope 会以 HTTPS 模式运行，mkcert 生成的根 CA 证书会保存在容器内的`/workspace/mkcert`目录，也就是宿主机挂载目录中的`mkcert`子目录。
 
 自签名证书默认不受设备信任。安装 PWA 前，你需要先把根 CA 证书安装到每台访问 Kaloscope 的设备上。
 
 ## 安装根 CA 证书
 
-先从宿主机挂载的 `/workspace/mkcert` 目录中取出根 CA 证书文件（通常为 `rootCA.pem`），再按设备类型安装：
+先从宿主机挂载的`/workspace/mkcert`目录中取出根 CA 证书文件（通常为`rootCA.pem`），再按设备类型安装：
 
-- **移动端**：不同品牌的手机步骤略有差异，通常需要在系统设置的安全或证书管理中导入 `rootCA.pem`，可通过搜索引擎搜索“手机型号 + 安装证书”来获取具体步骤（例如 [https://support.google.com/pixelphone/answer/2844832](https://support.google.com/pixelphone/answer/2844832)）
+- **移动端**：不同品牌的手机步骤略有差异，通常需要在系统设置的安全或证书管理中导入`rootCA.pem`，可通过搜索引擎搜索“手机型号 + 安装证书”来获取具体步骤（例如 [https://support.google.com/pixelphone/answer/2844832](https://support.google.com/pixelphone/answer/2844832)）
 - **桌面端**：
-  - **方式一**：在目标机器上安装 mkcert，将 `rootCA.pem` 放入指定目录并设置 `$CAROOT`，然后运行 `mkcert -install`（详见 mkcert [其他系统安装说明](https://github.com/FiloSottile/mkcert#installing-the-ca-on-other-systems)）
-  - **方式二**：不安装 mkcert，直接将 `rootCA.pem` 导入到操作系统或浏览器的受信任根证书列表中（可参考阿里云数字证书管理服务文档中的“[安装根证书](https://www.alibabacloud.com/help/ssl-certificate/download-a-root-certificate-and-an-intermediate-certificate#089448fd6abr1)”部分）
+  - **方式一**：在目标机器上安装 mkcert，将`rootCA.pem`放入指定目录并设置`$CAROOT`，然后运行`mkcert -install`（详见 mkcert [其他系统安装说明](https://github.com/FiloSottile/mkcert#installing-the-ca-on-other-systems)）
+  - **方式二**：不安装 mkcert，直接将`rootCA.pem`导入到操作系统或浏览器的受信任根证书列表中（可参考阿里云数字证书管理服务文档中的“[安装根证书](https://www.alibabacloud.com/help/ssl-certificate/download-a-root-certificate-and-an-intermediate-certificate#089448fd6abr1)”部分）
 
 安装完成后，重启浏览器，再次访问 Kaloscope 时证书应显示为可信。
 

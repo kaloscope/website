@@ -11,8 +11,8 @@
 
 模板来源为 GitHub 仓库。在**流程模板**页面点击右上角「编辑数据源」，在弹窗中点击「新增数据源」，输入仓库地址即可添加，支持以下两种格式：
 
-- **仓库全称**：如 `kaloscope/workflows`
-- **完整 URL**：如 `https://github.com/kaloscope/workflows`
+- **仓库全称**：如`kaloscope/workflows`
+- **完整 URL**：如`https://github.com/kaloscope/workflows`
 
 添加后系统会使用 Git 同步仓库内容，并在后台定期拉取更新。来源列表中会显示仓库名称、描述和上次同步时间。不再需要的来源可随时删除，已导入到本地的工作流不受影响。
 

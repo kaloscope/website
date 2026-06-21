@@ -55,7 +55,7 @@
 | HTTP 请求 | 发送 HTTP 请求，支持常见 HTTP 方法，请求头和请求体均支持 Jinja2 模板             |
 | 保存文本  | 将 Jinja2 模板渲染结果写入文件，路径必须位于某个媒体库目录下，支持不同的写入模式 |
 | 设置变量  | 将 Jinja2 模板渲染出的 JSON 键值对合并到当前上下文，供后续节点引用               |
-| 脚本      | 执行 Python 或 JavaScript 代码，通过约定的 `execute` 函数与引擎交互              |
+| 脚本      | 执行 Python 或 JavaScript 代码，通过约定的`execute`函数与引擎交互                |
 
 ### 控制
 
@@ -69,21 +69,21 @@
 
 每次流程执行时，引擎会创建一个独立的上下文对象，节点通过模板字段访问其中的数据。上下文的初始内容由以下来源合并而成：
 
-| 来源     | 说明                                                                                               |
-| -------- | -------------------------------------------------------------------------------------------------- |
-| 系统变量 | 当前 Kaloscope 版本等内置变量，例如 `ks_version`                                                   |
-| 全局变量 | 在「[全局变量](./variables.md)」中维护的键值对，加密变量会在注入前自动解密                         |
-| 本地变量 | 作用域限定在当前工作流的持久变量，可在多次执行之间保留状态                                         |
-| 启动参数 | 触发流程时传入的参数，会直接合并到上下文；定时调度「开始」节点中还可通过 `params` 引用原始启动参数 |
+| 来源     | 说明                                                                                             |
+| -------- | ------------------------------------------------------------------------------------------------ |
+| 系统变量 | 当前 Kaloscope 版本等内置变量，例如`ks_version`                                                  |
+| 全局变量 | 在「[全局变量](./variables.md)」中维护的键值对，加密变量会在注入前自动解密                       |
+| 本地变量 | 作用域限定在当前工作流的持久变量，可在多次执行之间保留状态                                       |
+| 启动参数 | 触发流程时传入的参数，会直接合并到上下文；定时调度「开始」节点中还可通过`params`引用原始启动参数 |
 
-上下文在运行过程中还会注入少量以 `$` 开头的特殊变量，供节点间传递数据和控制流程使用：
+上下文在运行过程中还会注入少量以`$`开头的特殊变量，供节点间传递数据和控制流程使用：
 
 | 变量名    | 说明                     |
 | --------- | ------------------------ |
 | `$retval` | 出口节点返回给调用方的值 |
 
 :::: v-pre
-循环节点会把当前元素按节点里填写的变量名注入上下文。例如变量名填写为 `item` 时，循环体内可通过 `{{ item }}` 访问当前元素；字典会按 `(key, value)` 键值对遍历，整数会按 `range(n)` 遍历。
+循环节点会把当前元素按节点里填写的变量名注入上下文。例如变量名填写为`item`时，循环体内可通过`{{ item }}`访问当前元素；字典会按`(key, value)`键值对遍历，整数会按`range(n)`遍历。
 ::::
 
 ## 模板字段
@@ -105,55 +105,55 @@ Kaloscope 扩展的过滤器覆盖了字符串处理、[JSONPath](https://github
 ### 自定义过滤器
 
 ::: v-pre
-在 Jinja2 中，过滤器（filter）用于把前一个表达式的结果继续传给一个处理函数，常见写法是 `{{ value | filter_name(arg1, arg2) }}`。除了 [Jinja2 内置过滤器](https://jinja.palletsprojects.com/en/stable/templates/#list-of-builtin-filters)，Kaloscope 还扩展了下面这些实用的自定义过滤器：
+在 Jinja2 中，过滤器（filter）用于把前一个表达式的结果继续传给一个处理函数，常见写法是`{{ value | filter_name(arg1, arg2) }}`。除了 [Jinja2 内置过滤器](https://jinja.palletsprojects.com/en/stable/templates/#list-of-builtin-filters)，Kaloscope 还扩展了下面这些实用的自定义过滤器：
 :::
 
 ::: v-pre
 | 名称 | 用途 | 示例 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | **字符串** | | |
 | `trim` | 去除首尾字符，递归处理列表/字典。参数：`chars`（可选，默认空白） | `{{ title \| trim }}` |
 | `ltrim` | 去除左侧字符，递归处理列表/字典。参数：`chars`（可选，默认空白） | `{{ title \| ltrim('[') }}` |
 | `rtrim` | 去除右侧字符，递归处理列表/字典。参数：`chars`（可选，默认空白） | `{{ title \| rtrim(']') }}` |
 | `json_escape` | 按 JSON 规则转义字符串 | `{{ keyword \| json_escape }}` |
-| `prefix` | 添加前缀。参数：`prefix`（前缀字符串）；`strict`（可选，默认 `true` 表示值或前缀为空时返回空字符串，传 `false` 始终拼接） | `{{ id \| prefix('/detail/') }}` |
-| `suffix` | 添加后缀。参数：`suffix`（后缀字符串）；`strict`（可选，默认 `true` 表示值或后缀为空时返回空字符串，传 `false` 始终拼接） | `{{ filename \| suffix('.nfo') }}` |
+| `prefix` | 添加前缀。参数：`prefix`（前缀字符串）；`strict`（可选，默认`true`表示值或前缀为空时返回空字符串，传`false`始终拼接） | `{{ id \| prefix('/detail/') }}` |
+| `suffix` | 添加后缀。参数：`suffix`（后缀字符串）；`strict`（可选，默认`true`表示值或后缀为空时返回空字符串，传`false`始终拼接） | `{{ filename \| suffix('.nfo') }}` |
 | `size` | 将字节数格式化为可读大小 | `{{ total_size \| size }}` |
 | **JSONPath** | | |
 | `jsonpath_first` | JSONPath 查询，返回第一个匹配值。参数：`expr`（JSONPath 表达式） | `{{ data \| jsonpath_first('$.items[*].title') }}` |
 | `jsonpath_all` | JSONPath 查询，返回全部匹配列表。参数：`expr`（JSONPath 表达式） | `{{ data \| jsonpath_all('$.items[*].title') }}` |
-| `jsonpath` | JSONPath 查询。参数：`expr`（JSONPath 表达式）；`limit`（可选，默认 `'auto'`，可传 `'first'`/`'all'`/整数） | `{{ data \| jsonpath('$.items[*].title', 'all') }}` |
+| `jsonpath` | JSONPath 查询。参数：`expr`（JSONPath 表达式）；`limit`（可选，默认`'auto'`，可传`'first'`/`'all'`/整数） | `{{ data \| jsonpath('$.items[*].title', 'all') }}` |
 | **XPath** | | |
 | `xpath_first` | XPath 查询，返回第一个匹配值。参数：`expr`（XPath 表达式） | `{{ html \| xpath_first('//title/text()') }}` |
 | `xpath_all` | XPath 查询，返回全部匹配列表。参数：`expr`（XPath 表达式） | `{{ html \| xpath_all('//a/@href') }}` |
-| `xpath` | XPath 查询。参数：`expr`（XPath 表达式）；`limit`（可选，默认 `'auto'`，可传 `'first'`/`'all'`/整数） | `{{ html \| xpath('//img/@src', 'first') }}` |
+| `xpath` | XPath 查询。参数：`expr`（XPath 表达式）；`limit`（可选，默认`'auto'`，可传`'first'`/`'all'`/整数） | `{{ html \| xpath('//img/@src', 'first') }}` |
 | **正则** | | |
 | `regex_first` | 正则匹配，返回第一个捕获组。参数：`expr`（正则表达式） | `{{ text \| regex_first('id=(\d+)') }}` |
 | `regex_all` | 正则匹配，返回所有捕获组列表。参数：`expr`（正则表达式） | `{{ text \| regex_all('href="([^"]+)"') }}` |
-| `regex` | 正则匹配。参数：`expr`（正则表达式）；`limit`（可选，默认 `'auto'`，可传 `'first'`/`'all'`/整数） | `{{ text \| regex('id=(\d+)') }}` |
+| `regex` | 正则匹配。参数：`expr`（正则表达式）；`limit`（可选，默认`'auto'`，可传`'first'`/`'all'`/整数） | `{{ text \| regex('id=(\d+)') }}` |
 | **时间与日期** | | |
-| `strftime` | 格式化时间。参数：`format`（可选，默认 `'%Y-%m-%d %H:%M:%S'`）；`tz`（可选，时区偏移小时数） | `{{ ts \| strftime('%Y-%m-%d', 8) }}` |
+| `strftime` | 格式化时间。参数：`format`（可选，默认`'%Y-%m-%d %H:%M:%S'`）；`tz`（可选，时区偏移小时数） | `{{ ts \| strftime('%Y-%m-%d', 8) }}` |
 | `year` | 提取年份。参数：`tz`（可选，时区偏移小时数） | `{{ publish_time \| year(8) }}` |
-| `duration` | 转为可读时长（`MM:SS`/`HH:MM:SS`）。参数：`unit`（可选，默认 `'milliseconds'`，可传 `'seconds'`/`'minutes'`） | `{{ seconds \| duration('seconds') }}` |
+| `duration` | 转为可读时长（`MM:SS`/`HH:MM:SS`）。参数：`unit`（可选，默认`'milliseconds'`，可传`'seconds'`/`'minutes'`） | `{{ seconds \| duration('seconds') }}` |
 | **编码、URL 与路径** | | |
 | `b64decode` | Base64 解码，返回文本字符串 | `{{ token \| b64decode }}` |
 | `b64encode` | Base64 编码，返回编码后的字符串 | `{{ password \| b64encode }}` |
 | `quote` | URL 百分号编码 | `{{ keyword \| quote }}` |
 | `query_param` | 追加查询参数；如果同名参数已存在则保持原 URL 不变 | `{{ url \| query_param('lang=zh-CN') }}` |
-| `parent_path` | 取父级目录。参数：`levels`（层数，默认 `1`）；`resolve`（先转绝对路径，默认 `false`） | `{{ path \| parent_path(2, true) }}` |
+| `parent_path` | 取父级目录。参数：`levels`（层数，默认`1`）；`resolve`（先转绝对路径，默认`false`） | `{{ path \| parent_path(2, true) }}` |
 | **中文转换** | | |
 | `s2t` | 简体转繁体 | `{{ title \| s2t }}` |
 | `t2s` | 繁体转简体 | `{{ title \| t2s }}` |
 :::
 
 ::: tip 特殊参数说明
-`jsonpath`、`xpath` 和 `regex` 这三个过滤器的 `limit` 参数默认为 `'auto'`，表示无匹配时返回 `None`，单个匹配时直接返回该值，多个匹配时返回列表。
+`jsonpath`、`xpath`和`regex`这三个过滤器的`limit`参数默认为`'auto'`，表示无匹配时返回`None`，单个匹配时直接返回该值，多个匹配时返回列表。
 :::
 
 ### 自定义测试
 
 ::: v-pre
-在 Jinja2 中，测试（test）用于判断一个值是否满足某个条件，常见写法是 `{% if value is test_name %}`。除了 [Jinja2 内置测试](https://jinja.palletsprojects.com/en/stable/templates/#list-of-builtin-tests)，Kaloscope 还扩展了下面两个与文件系统相关的自定义测试：
+在 Jinja2 中，测试（test）用于判断一个值是否满足某个条件，常见写法是`{% if value is test_name %}`。除了 [Jinja2 内置测试](https://jinja.palletsprojects.com/en/stable/templates/#list-of-builtin-tests)，Kaloscope 还扩展了下面两个与文件系统相关的自定义测试：
 :::
 
 ::: v-pre
