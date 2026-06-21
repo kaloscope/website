@@ -84,9 +84,9 @@ services:
 | `PUID`         | `0`     | 进程运行 UID，NAS 环境建议设为媒体目录所有者                                                                |
 | `PGID`         | `0`     | 进程运行 GID，NAS 环境建议设为媒体目录所属用户组                                                            |
 | `UMASK`        | `022`   | 文件创建掩码，影响容器内新建文件的默认权限                                                                  |
-| `TZ`           | 无      | 容器时区，如`Asia/Shanghai`、`UTC`等                                                                      |
+| `TZ`           | 无      | 容器时区，如`Asia/Shanghai`、`UTC`等                                                                        |
 | `AUTO_TLS`     | `false` | 使用 [mkcert](https://github.com/FiloSottile/mkcert) 自动签发本地 TLS 证书，适合需要局域网 HTTPS 访问的用户 |
-| `TLS_HOSTNAME` | 无      | 指定 TLS 证书绑定的主机名或 IP，`AUTO_TLS=true`时生效                                                      |
+| `TLS_HOSTNAME` | 无      | 指定 TLS 证书绑定的主机名或 IP，仅`AUTO_TLS=true`时生效                                                     |
 | `ENABLE_ARIA2` | `false` | 在容器内启动内置的 aria2 服务，适合不想单独部署下载器的用户                                                 |
 | `DEBUG_MODE`   | `false` | 以 DEBUG 模式启动，会输出更多日志，普通用户不需要开启                                                       |
 
@@ -94,23 +94,23 @@ services:
 
 容器需要映射以下端口以提供服务：
 
-| 端口   | 协议    | 说明                                                          |
-| ------ | ------- | ------------------------------------------------------------- |
-| `8000` | TCP     | Kaloscope Web UI 访问端口                                     |
+| 端口   | 协议    | 说明                                                        |
+| ------ | ------- | ----------------------------------------------------------- |
+| `8000` | TCP     | Kaloscope Web UI 访问端口                                   |
 | `6888` | TCP/UDP | aria2 DHT 与 BT 监听端口（仅`ENABLE_ARIA2=true`时需要映射） |
 
 ## 数据卷
 
 Dockerfile 唯一声明的持久化目录是`/workspace`，**必须挂载**，以保证容器重启后数据不丢失。该目录结构如下：
 
-| 容器内路径                | 说明                                                 |
-| ------------------------- | ---------------------------------------------------- |
-| `/workspace`              | 主数据目录                                           |
-| `/workspace/database`     | sqlite 数据库文件目录                                |
-| `/workspace/cache`        | HTTP 缓存数据库目录                                  |
-| `/workspace/images`       | 图片缓存目录                                         |
-| `/workspace/transcoded`   | 视频转码后的 HLS 文件目录                            |
-| `/workspace/repositories` | 工作流仓库目录                                       |
+| 容器内路径                | 说明                                                |
+| ------------------------- | --------------------------------------------------- |
+| `/workspace`              | 主数据目录                                          |
+| `/workspace/database`     | sqlite 数据库文件目录                               |
+| `/workspace/cache`        | HTTP 缓存数据库目录                                 |
+| `/workspace/images`       | 图片缓存目录                                        |
+| `/workspace/transcoded`   | 视频转码后的 HLS 文件目录                           |
+| `/workspace/repositories` | 工作流仓库目录                                      |
 | `/workspace/mkcert`       | mkcert 根 CA 证书目录（`AUTO_TLS=true`时自动创建）  |
 | `/workspace/aria2`        | aria2 会话文件目录（`ENABLE_ARIA2=true`时自动创建） |
 
