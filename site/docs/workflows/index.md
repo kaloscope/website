@@ -52,7 +52,7 @@
 
 | 节点名称  | 说明                                                                             |
 | --------- | -------------------------------------------------------------------------------- |
-| HTTP 请求 | 发送 HTTP 请求，支持 GET / POST 等方法，请求头和请求体均支持 Jinja2 模板         |
+| HTTP 请求 | 发送 HTTP 请求，支持常见 HTTP 方法，请求头和请求体均支持 Jinja2 模板             |
 | 保存文本  | 将 Jinja2 模板渲染结果写入文件，路径必须位于某个媒体库目录下，支持不同的写入模式 |
 | 设置变量  | 将 Jinja2 模板渲染出的 JSON 键值对合并到当前上下文，供后续节点引用               |
 | 脚本      | 执行 Python 或 JavaScript 代码，通过约定的 `execute` 函数与引擎交互              |
@@ -69,19 +69,22 @@
 
 每次流程执行时，引擎会创建一个独立的上下文对象，节点通过模板字段访问其中的数据。上下文的初始内容由以下来源合并而成：
 
-| 来源     | 说明                                                                       |
-| -------- | -------------------------------------------------------------------------- |
-| 全局变量 | 在「[全局变量](./variables.md)」中维护的键值对，加密变量会在注入前自动解密 |
-| 本地变量 | 作用域限定在当前工作流的持久变量，可在多次执行之间保留状态                 |
-| 启动参数 | 触发流程时传入的参数，在定时调度「开始」节点中可通过 `params` 引用         |
+| 来源     | 说明                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------- |
+| 系统变量 | 当前 Kaloscope 版本等内置变量，例如 `ks_version`                                                   |
+| 全局变量 | 在「[全局变量](./variables.md)」中维护的键值对，加密变量会在注入前自动解密                         |
+| 本地变量 | 作用域限定在当前工作流的持久变量，可在多次执行之间保留状态                                         |
+| 启动参数 | 触发流程时传入的参数，会直接合并到上下文；定时调度「开始」节点中还可通过 `params` 引用原始启动参数 |
 
-上下文在运行过程中还会注入以 `$` 开头的特殊变量，供节点间传递数据和控制流程使用：
+上下文在运行过程中还会注入少量以 `$` 开头的特殊变量，供节点间传递数据和控制流程使用：
 
 | 变量名    | 说明                     |
 | --------- | ------------------------ |
 | `$retval` | 出口节点返回给调用方的值 |
-| `$loop`   | 当前循环迭代的变量对象   |
-| `$index`  | 当前循环迭代的下标       |
+
+:::: v-pre
+循环节点会把当前元素按节点里填写的变量名注入上下文。例如变量名填写为 `item` 时，循环体内可通过 `{{ item }}` 访问当前元素；字典会按 `(key, value)` 键值对遍历，整数会按 `range(n)` 遍历。
+::::
 
 ## 模板字段
 
@@ -97,7 +100,7 @@
 
 :::
 
-Kaloscope 扩展的过滤器覆盖了字符串处理、[JSONPath](https://github.com/h2non/jsonpath-ng)、[XPath](https://lxml.de/xpathxslt.html#xpath)、正则提取、时间格式化和路径处理等多种操作，足够应对大多数索引与刮削场景。
+Kaloscope 扩展的过滤器覆盖了字符串处理、[JSONPath](https://github.com/h2non/jsonpath-ng)、[XPath](https://lxml.de/xpathxslt.html#xpath)、正则提取、时间格式化、URL 处理和路径处理等多种操作，足够应对大多数索引与刮削场景。
 
 ### 自定义过滤器
 
@@ -115,6 +118,7 @@ Kaloscope 扩展的过滤器覆盖了字符串处理、[JSONPath](https://github
 | `json_escape` | 按 JSON 规则转义字符串 | `{{ keyword \| json_escape }}` |
 | `prefix` | 添加前缀。参数：`prefix`（前缀字符串）；`strict`（可选，默认 `true` 表示值或前缀为空时返回空字符串，传 `false` 始终拼接） | `{{ id \| prefix('/detail/') }}` |
 | `suffix` | 添加后缀。参数：`suffix`（后缀字符串）；`strict`（可选，默认 `true` 表示值或后缀为空时返回空字符串，传 `false` 始终拼接） | `{{ filename \| suffix('.nfo') }}` |
+| `size` | 将字节数格式化为可读大小 | `{{ total_size \| size }}` |
 | **JSONPath** | | |
 | `jsonpath_first` | JSONPath 查询，返回第一个匹配值。参数：`expr`（JSONPath 表达式） | `{{ data \| jsonpath_first('$.items[*].title') }}` |
 | `jsonpath_all` | JSONPath 查询，返回全部匹配列表。参数：`expr`（JSONPath 表达式） | `{{ data \| jsonpath_all('$.items[*].title') }}` |
@@ -131,9 +135,11 @@ Kaloscope 扩展的过滤器覆盖了字符串处理、[JSONPath](https://github
 | `strftime` | 格式化时间。参数：`format`（可选，默认 `'%Y-%m-%d %H:%M:%S'`）；`tz`（可选，时区偏移小时数） | `{{ ts \| strftime('%Y-%m-%d', 8) }}` |
 | `year` | 提取年份。参数：`tz`（可选，时区偏移小时数） | `{{ publish_time \| year(8) }}` |
 | `duration` | 转为可读时长（`MM:SS`/`HH:MM:SS`）。参数：`unit`（可选，默认 `'milliseconds'`，可传 `'seconds'`/`'minutes'`） | `{{ seconds \| duration('seconds') }}` |
-| **编码与路径** | | |
+| **编码、URL 与路径** | | |
 | `b64decode` | Base64 解码，返回文本字符串 | `{{ token \| b64decode }}` |
 | `b64encode` | Base64 编码，返回编码后的字符串 | `{{ password \| b64encode }}` |
+| `quote` | URL 百分号编码 | `{{ keyword \| quote }}` |
+| `query_param` | 追加查询参数；如果同名参数已存在则保持原 URL 不变 | `{{ url \| query_param('lang=zh-CN') }}` |
 | `parent_path` | 取父级目录。参数：`levels`（层数，默认 `1`）；`resolve`（先转绝对路径，默认 `false`） | `{{ path \| parent_path(2, true) }}` |
 | **中文转换** | | |
 | `s2t` | 简体转繁体 | `{{ title \| s2t }}` |

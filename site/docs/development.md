@@ -63,6 +63,7 @@ kaloscope/
 │       ├── routes/             # API 路由
 │       ├── services/           # 业务逻辑
 │       ├── models/             # 数据模型
+│       ├── migrations/         # 数据库迁移
 │       ├── utils/              # 工具函数
 │       └── core/               # 核心模块
 │           ├── dl/             # 下载器适配
@@ -70,6 +71,7 @@ kaloscope/
 │           └── media/          # 媒体库管理
 └── workspace/                  # 运行时数据
     ├── database/               # 数据库
+    ├── cache/                  # HTTP 缓存
     ├── images/                 # 图片缓存
     ├── transcoded/             # 转码目录
     └── repositories/           # 工作流仓库

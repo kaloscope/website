@@ -2,7 +2,7 @@
 
 ## 如何升级到新版本
 
-升级前无需备份，持久化数据均存放在挂载的 `/workspace` 目录中，不受容器重建影响。
+正常升级只需保留原来的`/workspace`挂载目录，容器重建不会影响其中的数据。升级前仍建议先备份`/workspace`，尤其是`/workspace/database`下的数据库文件，方便在异常情况下回滚。
 
 **Docker CLI 手动升级**
 
@@ -33,7 +33,7 @@ docker image prune -f     # 可选：清理旧版本镜像释放空间
 
 **Watchtower 自动更新**
 
-使用 [Watchtower](https://containrrr.dev/watchtower/) 实现镜像自动更新，无需手动操作。在 `docker-compose.yml` 中添加以下服务：
+使用 [Watchtower](https://containrrr.dev/watchtower/) 实现镜像自动更新，无需手动操作。在`docker-compose.yml`中添加以下服务：
 
 ```yaml
 services:
@@ -44,10 +44,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=Asia/Shanghai
-      - WATCHTOWER_CLEANUP=true           # 更新后删除旧镜像
-      - WATCHTOWER_POLL_INTERVAL=86400    # 检查间隔（秒）
-      - WATCHTOWER_LABEL_ENABLE=true      # 仅更新带有启用标签的容器
-      - DOCKER_API_VERSION=1.44           # 可选：指定 Docker API 版本
+      - WATCHTOWER_CLEANUP=true         # 更新后删除旧镜像
+      - WATCHTOWER_POLL_INTERVAL=86400  # 检查间隔（秒）
+      - WATCHTOWER_LABEL_ENABLE=true    # 仅更新带有启用标签的容器
+      - DOCKER_API_VERSION=1.44         # 可选：指定 Docker API 版本
     restart: unless-stopped
 ```
 
@@ -59,9 +59,9 @@ kaloscope:
     - com.centurylinklabs.watchtower.enable=true
 ```
 
-完成后执行 `docker compose up -d` 即可。按照当前配置，Watchtower 会每 24 小时检查一次新版本，发现更新后会自动拉取并重启容器。
+完成后执行`docker compose up -d`即可。按照当前配置，Watchtower 会每 24 小时检查一次新版本，发现更新后会自动拉取并重启容器。
 
-> 如果不希望自动更新而只想接收通知，可将 `WATCHTOWER_LABEL_ENABLE` 替换为 `WATCHTOWER_MONITOR_ONLY=true`，并配置邮件或 Webhook 通知。
+> 如果不希望自动更新而只想接收通知，可将`WATCHTOWER_LABEL_ENABLE`替换为`WATCHTOWER_MONITOR_ONLY=true`，并配置邮件或 Webhook 通知。
 
 ## 第三方工作流是否安全
 
@@ -71,12 +71,12 @@ kaloscope:
 
 Jellyfin 等工具专注于媒体播放与流媒体分发。Kaloscope 的差异化在于通过可编辑工作流接入任意资源站，自动完成搜索、下载、整理全流程。两者定位不同，可搭配使用。
 
-## 连接宿主机下载器时，容器内下载路径和宿主机路径不一致
+## 连接宿主机下载器时，下载路径不一致
 
 ::: v-pre
-当 Kaloscope 以容器方式运行，而下载器部署在宿主机时，两边看到的下载目录路径可能不同，从而导致下载失败。例如容器内 `/downloads` 对应宿主机 `/data/downloads`。
+当 Kaloscope 以容器方式运行，而下载器部署在宿主机时，两边看到的下载目录路径可能不同，从而导致下载失败。例如容器 `/downloads`对应宿主机`/data/downloads`。
 
-该问题可以通过固定下载路径来解决。以 qBittorrent 为例，配置文件中有两处 `savepath` ，分别对应磁力链接和种子文件的下载路径：
+该问题可以通过固定下载路径来解决。以 qBittorrent 为例，配置文件中有两处`savepath`，分别对应磁力链接和种子文件的下载路径：
 
 ```yaml
 methods:
@@ -90,5 +90,5 @@ methods:
       torrents: '{{torrent}}'
 ```
 
-将这两处配置中的 `{{dir}}` 替换为**宿主机中的绝对路径**，下载器就能直接使用宿主机路径进行下载。
+将这两处配置中的`{{dir}}`替换为**宿主机中的绝对路径**，下载器就能直接使用宿主机路径进行下载。
 :::

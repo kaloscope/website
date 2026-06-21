@@ -107,8 +107,10 @@ Dockerfile 唯一声明的持久化目录是 `/workspace`，**必须挂载**，�
 | ------------------------- | ---------------------------------------------------- |
 | `/workspace`              | 主数据目录                                           |
 | `/workspace/database`     | sqlite 数据库文件目录                                |
-| `/workspace/repositories` | 工作流仓库目录                                       |
+| `/workspace/cache`        | HTTP 缓存数据库目录                                  |
 | `/workspace/images`       | 图片缓存目录                                         |
+| `/workspace/transcoded`   | 视频转码后的 HLS 文件目录                            |
+| `/workspace/repositories` | 工作流仓库目录                                       |
 | `/workspace/mkcert`       | mkcert 根 CA 证书目录（`AUTO_TLS=true` 时自动创建）  |
 | `/workspace/aria2`        | aria2 会话文件目录（`ENABLE_ARIA2=true` 时自动创建） |
 
