@@ -161,7 +161,7 @@
 
 @media (min-width: 1440px) {
   :root {
-    --vp-layout-max-width: 1760px;
+    --vp-layout-max-width: 1600px;
   }
 
   .VPDoc.has-aside .content-container {

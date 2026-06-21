@@ -11,7 +11,7 @@
 如果暂时不想自己部署 HTTPS，可以使用 Docker 镜像内置的自签名证书方案（见下文）。
 
 ::: tip iOS 用户
-iOS Safari 的“添加到主屏幕”功能无需 HTTPS 即可使用，也会有独立图标和全屏体验，只是不会启用 Service Worker 等 PWA 特性，因此 iOS 用户也可以选择直接安装而不配置 HTTPS。
+iOS Safari 的`添加到主屏幕`功能无需 HTTPS 即可使用，也会有独立图标和全屏体验，只是不会启用 Service Worker 等 PWA 特性，因此 iOS 用户也可以选择直接安装而不配置 HTTPS。
 :::
 
 ## 使用自签名证书
@@ -42,8 +42,8 @@ Docker 镜像内置了 [mkcert](https://github.com/FiloSottile/mkcert)，可通�
 
 确认 Kaloscope 已可通过 HTTPS 正常访问后，即可在浏览器中安装 PWA：
 
-- **移动端**：通常可通过浏览器菜单中的“添加到主屏幕”入口完成安装
-- **桌面端**：通常可通过地址栏右侧或浏览器菜单中的“安装应用”入口完成安装
+- **移动端**：通常可通过浏览器菜单中的`添加到主屏幕`入口完成安装
+- **桌面端**：通常可通过地址栏右侧或浏览器菜单中的`安装应用`入口完成安装
 
 不同浏览器和操作系统的安装入口略有差异，详细步骤可参考 web.dev 的 [PWA 安装指南](https://web.dev/learn/pwa/installation)。
 
