@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref, watch } from 'vue';
 import { useData, useRoute } from 'vitepress';
+import { nextTick, onMounted, ref, watch } from 'vue';
 
 const { isDark } = useData();
 const route = useRoute();
@@ -24,10 +24,7 @@ function getTheme() {
 }
 
 function setDataAttribute(script: HTMLScriptElement, key: string, value: string) {
-  script.setAttribute(
-    `data-${key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`,
-    value
-  );
+  script.setAttribute(`data-${key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value);
 }
 
 async function renderGiscus() {
