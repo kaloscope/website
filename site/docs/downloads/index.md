@@ -8,7 +8,7 @@
 - 任务完成后可按硬链接、软链接、移动或复制方式转移到媒体库
 - 与下载计划联动，把搜索结果自动提交到指定的下载器
 
-![download-task](/screenshots/download-task.png)
+<img src="/screenshots/download-task.png" alt="download-task" width="1382" height="849">
 
 ## 创建下载器
 

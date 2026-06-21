@@ -2,7 +2,7 @@
 
 全局搜索适合在不确定资源来自哪个站点时使用。输入一个关键词后，系统会在所有符合条件的索引器中并行发起搜索，结果按索引器分标签页展示。
 
-![websearch-global](/screenshots/websearch-global.png)
+<img src="/screenshots/websearch-global.png" alt="websearch-global" width="1382" height="849">
 
 ## 参与条件
 

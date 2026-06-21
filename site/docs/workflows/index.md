@@ -2,9 +2,9 @@
 
 工作流是 Kaloscope 的自动化基础，负责将对外部站点或本地文件系统的操作封装成可复用的执行单元。资源搜索、站点认证、下载计划、NFO 生成和定时任务，本质上都是工作流在运行。
 
-一个工作流由若干**节点**和连接它们的**边**组成。执行时，引擎从入口节点出发，沿边依次调用各节点，直到到达出口节点或流程结束。每次执行都会创建一个独立的**上下文**，节点之间通过上下文共享和传递数据。
+一个工作流由若干**`节点`**和连接它们的**`边`**组成。执行时，引擎从入口节点出发，沿边依次调用各节点，直到到达出口节点或流程结束。每次执行都会创建一个独立的**`上下文`**，节点之间通过上下文共享和传递数据。
 
-![workflow-complex](/screenshots/workflow-complex.png)
+<img src="/screenshots/workflow-graphs.png" alt="workflow-graphs" width="1382" height="849">
 
 ## 生命周期
 
@@ -14,14 +14,14 @@
 | 已发布 | 可被索引器、下载计划或定时任务绑定并触发                       |
 | 有更新 | 已发布后又做了修改，旧版本仍在生效，重新发布后才会切换到新版本 |
 
-![workflow-graphs](/screenshots/workflow-graphs.png)
-
 ## 编辑器结构
 
 - **节点**（左侧）：按类型分组展示所有可用节点，拖入画布即可使用
 - **画布**（中央）：放置节点、连接句柄、调整布局
 - **小地图**（右下）：整体流程概览，支持快速定位和缩放
 - **工具栏**（右上）：适应视图、撤销、重做、保存、发布等操作
+
+<img src="/screenshots/workflow-complex.png" alt="workflow-complex" width="1382" height="849">
 
 ## 工作流节点
 
@@ -81,6 +81,8 @@
 | 变量名    | 说明                     |
 | --------- | ------------------------ |
 | `$retval` | 出口节点返回给调用方的值 |
+| `$loop`   | 当前循环迭代的变量对象   |
+| `$index`  | 当前循环迭代的下标       |
 
 :::: v-pre
 循环节点会把当前元素按节点里填写的变量名注入上下文。例如变量名填写为`item`时，循环体内可通过`{{ item }}`访问当前元素；字典会按`(key, value)`键值对遍历，整数会按`range(n)`遍历。
@@ -100,7 +102,7 @@
 
 :::
 
-Kaloscope 扩展的过滤器覆盖了字符串处理、[JSONPath](https://github.com/h2non/jsonpath-ng)、[XPath](https://lxml.de/xpathxslt.html#xpath)、正则提取、时间格式化、URL 处理和路径处理等多种操作，足够应对大多数索引与刮削场景。
+Kaloscope 扩展的过滤器覆盖了[JSONPath](https://github.com/h2non/jsonpath-ng)、[XPath](https://lxml.de/xpathxslt.html#xpath)、正则提取、时间格式化、字符串处理、URL 处理和路径处理等多种操作，足够应对大多数索引与刮削场景。
 
 ### 自定义过滤器
 

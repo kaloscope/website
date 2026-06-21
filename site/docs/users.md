@@ -7,7 +7,7 @@
 - 为普通用户分配权限
 - 删除普通用户账号
 
-![new-user](/screenshots/new-user.png)
+<img src="/screenshots/new-user.png" alt="new-user" width="1382" height="849">
 
 ## 权限边界
 

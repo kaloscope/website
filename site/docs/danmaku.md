@@ -7,7 +7,7 @@
 - 调整显示区域、弹幕速度、不透明度与字号
 - 支持自动匹配弹幕元数据或手动搜索确认剧集
 
-![danmaku-settings](/screenshots/danmaku-settings.png)
+<img src="/screenshots/danmaku-settings.png" alt="danmaku-settings" width="1382" height="849">
 
 ## 自动匹配
 
@@ -17,7 +17,7 @@
 - 自动匹配不理想时，可以手动搜索并确认目标剧集
 - 匹配成功后，弹幕会缓存到本地，后续播放可直接复用
 
-![danmaku-match](/screenshots/danmaku-match.png)
+<img src="/screenshots/danmaku-match.png" alt="danmaku-match" width="1382" height="849">
 
 ## 弹幕服务器
 
@@ -27,4 +27,4 @@
 https://danmaku.kaloscope.org
 ```
 
-![new-medialib](/screenshots/new-medialib.png)
+<img src="/screenshots/new-medialib.png" alt="new-medialib" width="1382" height="849">

@@ -2,7 +2,7 @@
 
 渐进式 Web 应用（Progressive Web App，PWA）是一种可安装到设备的 Web 应用形态。安装后，Kaloscope 会以独立窗口运行，拥有单独的图标和任务栏入口，体验更接近原生应用。
 
-![pwa-desktop](/screenshots/pwa-desktop.png)
+<img src="/screenshots/pwa-desktop.png" alt="pwa-desktop" width="1382" height="849">
 
 ## HTTPS 要求
 

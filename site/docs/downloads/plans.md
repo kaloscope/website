@@ -7,7 +7,7 @@
 - 周期性执行搜索，并把结果自动加入下载器
 - 记录最近执行时间、累计命中数量和运行状态
 
-![download-plan](/screenshots/download-plan.png)
+<img src="/screenshots/download-plan.png" alt="download-plan" width="1382" height="849">
 
 ## 新增计划
 

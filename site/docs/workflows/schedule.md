@@ -5,7 +5,7 @@
 - 支持按名称、状态、触发方式等维度进行筛选
 - 支持新增、编辑、暂停、恢复和删除任务
 
-![new-schedule](/screenshots/new-schedule.png)
+<img src="/screenshots/new-schedule.png" alt="new-schedule" width="1382" height="849">
 
 ## 新增任务
 

@@ -7,7 +7,7 @@
 - 分别控制是否启用 DNS 或代理
 - 通过规则顺序决定匹配优先级
 
-![network-rules](/screenshots/network-rules.png)
+<img src="/screenshots/network-rules.png" alt="network-rules" width="1382" height="849">
 
 ## 作用范围
 

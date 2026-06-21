@@ -5,7 +5,7 @@
 - 支持维护多个模板仓库来源
 - 支持按名称、仓库、流程分类等维度进行筛选
 
-![workflow-templates](/screenshots/workflow-templates.png)
+<img src="/screenshots/workflow-templates.png" alt="workflow-templates" width="1382" height="849">
 
 ## 添加仓库
 

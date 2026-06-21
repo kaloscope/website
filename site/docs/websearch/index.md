@@ -11,7 +11,7 @@
 
 索引器并不要求实现全部四条链路，仅需按实际站点能力配置对应链路即可。索引器在“设置 > 工作流 > 流程定义”中管理，可单独启用或禁用。
 
-![websearch](/screenshots/websearch.png)
+<img src="/screenshots/websearch.png" alt="websearch" width="1382" height="849">
 
 ## 使用方式
 
