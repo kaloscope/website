@@ -154,3 +154,22 @@
   --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
+
+/**
+ * Component: Docs Layout
+ * -------------------------------------------------------------------------- */
+
+@media (min-width: 1440px) {
+  :root {
+    --vp-layout-max-width: 1760px;
+  }
+
+  .VPDoc.has-aside .content-container {
+    max-width: 960px !important;
+  }
+
+  .VPDoc .content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
