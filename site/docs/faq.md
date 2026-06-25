@@ -112,3 +112,14 @@ methods:
 :::
 
 </details>
+
+<details class="faq-item">
+<summary>5. 部署后无法通过 http://&lt;宿主机IP&gt;:8000 访问</summary>
+
+<br>
+
+如果确认容器已经正常启动，但访问`http://<宿主机IP>:8000`无法打开页面，可以检查是否开启了`AUTO_TLS=true`。开启该选项后，服务会使用 HTTPS，此时需要通过`https://<宿主机IP>:8000`访问。
+
+> 如果没有 PWA 安装需求，一般不需要开启`AUTO_TLS`。
+
+</details>
