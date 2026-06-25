@@ -1,6 +1,9 @@
 # 常见问题
 
-## 如何升级到新版本
+<details class="faq-item">
+<summary>1. 如何升级到新版本</summary>
+
+<br>
 
 正常升级只需保留原来的`/workspace`挂载目录，容器重建不会影响其中的数据。升级前仍建议先备份`/workspace`，尤其是`/workspace/database`下的数据库文件，方便在异常情况下回滚。
 
@@ -44,10 +47,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=Asia/Shanghai
-      - WATCHTOWER_CLEANUP=true         # 更新后删除旧镜像
-      - WATCHTOWER_POLL_INTERVAL=86400  # 检查间隔（秒）
-      - WATCHTOWER_LABEL_ENABLE=true    # 仅更新带有启用标签的容器
-      - DOCKER_API_VERSION=1.44         # 可选：指定 Docker API 版本
+      - WATCHTOWER_CLEANUP=true           # 更新后删除旧镜像
+      - WATCHTOWER_POLL_INTERVAL=86400    # 检查间隔（秒）
+      - WATCHTOWER_LABEL_ENABLE=true      # 仅更新带有启用标签的容器
+      - DOCKER_API_VERSION=1.44           # 可选：指定 Docker API 版本
     restart: unless-stopped
 ```
 
@@ -63,15 +66,30 @@ kaloscope:
 
 > 如果不希望自动更新而只想接收通知，可将`WATCHTOWER_LABEL_ENABLE`替换为`WATCHTOWER_MONITOR_ONLY=true`，并配置邮件或 Webhook 通知。
 
-## 第三方工作流是否安全
+</details>
+
+<details class="faq-item">
+<summary>2. 第三方工作流是否安全</summary>
+
+<br>
 
 不一定。工作流可包含任意 HTTP 请求和 Python 脚本，导入前请自行审查其行为。
 
-## 和 Jellyfin / Emby 有什么区别
+</details>
+
+<details class="faq-item">
+<summary>3. 和 Jellyfin / Emby 有什么区别</summary>
+
+<br>
 
 Jellyfin 等工具专注于媒体播放与流媒体分发。Kaloscope 的差异化在于通过可编辑工作流接入任意资源站，自动完成搜索、下载、整理全流程。两者定位不同，可搭配使用。
 
-## 连接宿主机下载器时，下载路径不一致
+</details>
+
+<details class="faq-item">
+<summary>4. 连接宿主机下载器时，下载路径不一致</summary>
+
+<br>
 
 ::: v-pre
 当 Kaloscope 以容器方式运行，而下载器部署在宿主机时，两边看到的下载目录路径可能不同，从而导致下载失败。例如容器`/downloads`对应宿主机`/data/downloads`。
@@ -92,3 +110,5 @@ methods:
 
 将这两处配置中的`{{dir}}`替换为**宿主机中的绝对路径**，下载器就能直接使用宿主机路径进行下载。
 :::
+
+</details>
