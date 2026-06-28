@@ -14,4 +14,4 @@
 
 - [配置工作流](./workflows/templates)：导入工作流仓库，配置索引器与刮削逻辑
 - [添加下载器](./downloads/index)：连接 aria2、qBittorrent 或 Transmission
-- [创建媒体库](./medialibs)：指定媒体文件的根目录，开始扫描入库
+- [创建媒体库](./medialibs/index)：指定媒体文件的根目录，开始扫描入库

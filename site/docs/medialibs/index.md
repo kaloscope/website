@@ -23,7 +23,7 @@
 
 ## 元数据
 
-Kaloscope 从 [NFO](http://wikipedia.org/wiki/.nfo) 文件读取元数据，包括标题、简介、评分、年份、演员、导演、标签、海报等。NFO 文件需与媒体文件同名（仅扩展名不同），其内容为符合 [Kodi](https://kodi.wiki/view/NFO_files) NFO 规范的 XML 文档。NFO 文件也可以通过资源入库工作流中的「[结束节点](./workflows/index#工作流节点)」自动生成。
+Kaloscope 从 [NFO](http://wikipedia.org/wiki/.nfo) 文件读取元数据，包括标题、简介、评分、年份、演员、导演、标签、海报等。NFO 文件需与媒体文件同名（仅扩展名不同），其内容为符合 [Kodi](https://kodi.wiki/view/NFO_files) NFO 规范的 XML 文档。NFO 文件也可以通过资源入库工作流中的「[结束节点](../workflows/index#工作流节点)」自动生成。
 
 如果媒体库配置了关联工作流，还可以对单个媒体条目手动刮削：在媒体条目菜单点击「刮削元数据」，填写标题、年份、语言等条件后搜索候选结果，选中后确认即可将元数据写入 NFO 文件并更新媒体信息。
 

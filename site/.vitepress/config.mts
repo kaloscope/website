@@ -53,8 +53,11 @@ export default defineConfig({
             link: '/docs/downloads/',
             items: [{ text: '下载计划', link: '/docs/downloads/plans' }]
           },
-          { text: '媒体库', link: '/docs/medialibs' },
-          { text: '弹幕设置', link: '/docs/danmaku' },
+          {
+            text: '媒体库',
+            link: '/docs/medialibs/',
+            items: [{ text: '弹幕设置', link: '/docs/medialibs/danmaku' }]
+          },
           { text: '网络设置', link: '/docs/network' },
           { text: '用户管理', link: '/docs/users' },
           { text: '安装 PWA', link: '/docs/pwa' }
