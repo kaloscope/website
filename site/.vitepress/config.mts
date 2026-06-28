@@ -56,7 +56,10 @@ export default defineConfig({
           {
             text: '媒体库',
             link: '/docs/medialibs/',
-            items: [{ text: '弹幕设置', link: '/docs/medialibs/danmaku' }]
+            items: [
+              { text: '弹幕设置', link: '/docs/medialibs/danmaku' },
+              { text: '转码设置', link: '/docs/medialibs/transcode' }
+            ]
           },
           { text: '网络设置', link: '/docs/network' },
           { text: '用户管理', link: '/docs/users' },
