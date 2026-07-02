@@ -123,3 +123,14 @@ methods:
 > 如果没有 PWA 安装需求，一般不需要开启`AUTO_TLS`。
 
 </details>
+
+<details class="faq-item">
+<summary>6. 流程模板处导入数据源失败怎么办</summary>
+
+<br>
+
+流程模板的数据源托管在 GitHub，直连不稳定时可能会请求失败。可以先重试几次，通常可以成功；如果配置了代理，建议在「网络设置」页面将`https://*github.com`绑定到代理，这样会更稳定。
+
+如果仍然无法成功，也可以通过下载模板仓库源码来手动导入。可前往模板仓库的 GitHub 页面，例如 [kaloscope/workflows](https://github.com/kaloscope/workflows)，点击「Code」->「Download ZIP」下载源码压缩包。下载完成后，在「流程定义」页面点击右上角导入按钮，选择该 ZIP 文件即可导入。
+
+</details>
