@@ -19,7 +19,7 @@ docker run -d \
   -e ENABLE_ARIA2=true \
   -v /volume1/kaloscope/workspace:/workspace \
   -v /volume1/kaloscope/downloads:/downloads \
-  -v /volume1/kaloscope/animes:/animes \
+  -v /volume1/kaloscope/anime:/anime \
   -p 8000:8000 \
   -p 6888:6888 \
   -p 6888:6888/udp \
@@ -49,7 +49,7 @@ services:
     volumes:
       - /volume1/kaloscope/workspace:/workspace
       - /volume1/kaloscope/downloads:/downloads
-      - /volume1/kaloscope/animes:/animes
+      - /volume1/kaloscope/anime:/anime
     ports:
       - 8000:8000
       - 6888:6888
@@ -114,7 +114,7 @@ Dockerfile 唯一声明的持久化目录是`/workspace`，**必须挂载**，�
 | `/workspace/mkcert`       | mkcert 根 CA 证书目录（`AUTO_TLS=true`时自动创建）  |
 | `/workspace/aria2`        | aria2 会话文件目录（`ENABLE_ARIA2=true`时自动创建） |
 
-下载文件目录（如`/downloads`）和媒体库目录（如`/animes`）等没有在 Dockerfile 中显式声明，按需挂载即可。
+下载文件目录（如`/downloads`）和媒体库目录（如`/anime`）等没有在 Dockerfile 中显式声明，按需挂载即可。
 
 ::: tip 硬链接支持
 若下载目录与媒体库目录分别映射为两个独立的宿主机路径，跨挂载点的硬链接将无法创建，转移文件时会自动降级为软链接。有硬链接需求的用户，建议将下载目录与媒体库目录统一挂载在同一个宿主机路径下（例如同属`/volume1/media`），确保二者位于同一文件系统。
