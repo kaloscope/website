@@ -27,7 +27,7 @@ features:
       dark: /fluent--video-clip-multiple-dark.svg
       light: /fluent--video-clip-multiple-light.svg
     title: 媒体库管理
-    details: 自动扫描媒体文件、解析 NFO 元数据，内置弹幕播放器，支持订阅追番与自动下载。
+    details: 扫描并刮削 NFO 元数据，按模板整理目录与文件名，支持弹幕、字幕、转码播放与自动追更。
   - icon:
       dark: /fluent--desktop-arrow-down-dark.svg
       light: /fluent--desktop-arrow-down-light.svg

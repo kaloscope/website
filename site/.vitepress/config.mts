@@ -57,6 +57,7 @@ export default defineConfig({
             text: '媒体库',
             link: '/docs/medialibs/',
             items: [
+              { text: '自动整理', link: '/docs/medialibs/organization' },
               { text: '弹幕设置', link: '/docs/medialibs/danmaku' },
               { text: '转码设置', link: '/docs/medialibs/transcode' }
             ]

@@ -11,6 +11,7 @@
 - [Node.js](https://nodejs.org/) 24+
 - [Poetry](https://python-poetry.org/) 2.4+
 - [pnpm](https://pnpm.io/) 11+
+- FFmpeg 与 ffprobe：用于媒体探测、内嵌字幕、章节和转码
 
 ### 安装运行
 
@@ -33,7 +34,7 @@ poetry run sanic app.main:app --fast --reload --debug
 
 ```bash
 cd frontend
-pnpm install
+pnpm install --frozen-lockfile
 pnpm run dev
 ```
 
@@ -68,7 +69,8 @@ kaloscope/
 │       └── core/               # 核心模块
 │           ├── dl/             # 下载器适配
 │           ├── flow/           # 工作流引擎
-│           └── media/          # 媒体库管理
+│           ├── media/          # 扫描、入库与自动整理
+│           └── transcode/      # 转码与能力探测
 └── workspace/                  # 运行时数据
     ├── database/               # 数据库
     ├── cache/                  # HTTP 缓存
@@ -93,7 +95,29 @@ kaloscope/
 3. 在 GitHub 上发起 Pull Request，合并目标选择主仓库的`main`分支
 4. PR 标题和描述请清晰说明改了什么、为什么这样改
 5. 每个 PR 应聚焦于单一功能或修复，保持改动范围小且专注，便于 Review
-6. 提交前请确保完成以下检查：
-   - 已安装 [pre-commit](https://pre-commit.com/) hooks，提交时会自动执行代码格式化与检查
-   - 修改了后端代码：所有单元测试通过（`cd backend && poetry run pytest -v`）
-   - 修改了前端代码：lint 与类型检查通过（`cd frontend && pnpm run lint && pnpm run check`）
+6. 根据改动范围完成下面的检查，并在 PR 中说明实际结果；修改界面时附上截图
+
+### 检查与测试
+
+前端在 `frontend` 目录执行：
+
+```bash
+pnpm run check
+pnpm run lint
+# 涉及路由、依赖、构建配置、静态资源或 PWA 时补充构建
+pnpm run build
+```
+
+后端在 `backend` 目录执行：
+
+```bash
+poetry run pytest -v
+poetry run ruff check .
+poetry run ruff format --check .
+```
+
+局部后端修改可先运行相关测试文件；公共模型、共享基础设施和跨模块修改应运行完整测试集。前端目前没有 `test` 脚本，界面修改需结合实际页面交互验证。
+
+仓库使用 prek 管理 Git hooks，可在 `backend` 目录执行 `poetry run prek install`。钩子沿用根目录的 `.pre-commit-config.yaml`，可能格式化文件或更新锁文件，运行后应检查差异。仅修改文档时，核对路径、命令和说明，并执行 `git diff --check` 即可。
+
+开发和验证请使用独立的 `workspace`。启动完整后端会自动迁移数据库，并开启下载同步和媒体库监控，不应直接使用实际媒体库与下载任务的数据进行测试。

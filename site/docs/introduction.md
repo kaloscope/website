@@ -4,14 +4,14 @@ Kaloscope 是以可视化工作流为核心的本地媒体库管理工具。其�
 
 ## 功能概览
 
-- 可视化工作流编辑器
-- 多索引器资源搜索
-- 媒体文件扫描与 NFO 元数据解析
-- 内置支持弹幕的视频播放器
-- 自定义 HTTP 代理与 DNS 解析规则
-- 兼容 aria2、qBittorrent、Transmission 等主流下载器
-- 多用户与权限控制
-- PWA 安装与国际化界面
+- [可视化工作流](./workflows/)：编排 HTTP 请求、脚本、条件和循环，支持本地变量缓存与定时调度
+- [多索引器资源搜索](./websearch/)：聚合搜索、在线预览、认证与收藏
+- [下载管理](./downloads/)：连接 aria2、qBittorrent、Transmission、OpenList 或 NAS 迅雷，支持自动追更与完成后转移
+- [媒体库管理](./medialibs/)：扫描与实时监控、NFO 刮削、按元数据[自动整理和重命名](./medialibs/organization)
+- 在线播放：字幕、章节、续播、[弹幕匹配与过滤](./medialibs/danmaku)，以及[服务端转码](./medialibs/transcode)
+- [网络设置](./network)：自定义 HTTP 代理与 DNS 解析规则
+- [多用户与访问权限](./users)、[PWA 安装](./pwa)与国际化界面
+- 系统监控：查看实时日志和管理转码任务
 
 ## 适用场景
 

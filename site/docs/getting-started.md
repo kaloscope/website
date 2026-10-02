@@ -12,6 +12,18 @@
 
 登录成功后，建议按顺序完成以下配置：
 
-- [配置工作流](./workflows/templates)：导入工作流仓库，配置索引器与刮削逻辑
-- [添加下载器](./downloads/index)：连接 aria2、qBittorrent 或 Transmission
-- [创建媒体库](./medialibs/index)：指定媒体文件的根目录，开始扫描入库
+1. [配置工作流](./workflows/templates)：导入模板，检查必要的全局变量，发布需要的索引器和资源入库工作流
+2. [创建媒体库](./medialibs/)：选择电影或电视剧类型，指定根目录并绑定刮削工作流；创建后会扫描已有文件
+3. [添加下载器](./downloads/)：按需连接 aria2、qBittorrent、Transmission、OpenList 或 NAS 迅雷
+4. [设置下载计划](./downloads/plans)：选择搜索工作流和下载器，配置完成后转移到刚创建的媒体库
+
+只管理已有本地视频时，完成媒体库配置即可，下载器和下载计划可以稍后添加。
+
+## 第四步：完善媒体体验
+
+- 希望按标题、年份和季集统一目录时，为媒体库设置[自动重命名模板](./medialibs/organization)，并确认 NFO 元数据完整
+- 需要弹幕时，填写[弹幕服务器](./medialibs/danmaku)，然后在媒体条目菜单或播放器内确认匹配
+- 浏览器无法直接播放视频时，配置[服务端转码](./medialibs/transcode)
+- 媒体库较大且不需要每次启动全量扫描时，可以关闭该开关；停机期间修改了文件后，记得[手动扫描](./medialibs/#扫描与实时监控)
+
+需要按时间自动运行自定义工作流时，再配置[定时调度](./workflows/schedule)。
