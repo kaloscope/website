@@ -1,7 +1,7 @@
 ---
 layout: home
 markdownStyles: false
-description: 用 AI 与可视化工作流编排搜索、下载和入库，在本地管理电影、剧集、小说与漫画。
+description: 在本地管理电影、剧集、小说与漫画，用工作流和 AI 自动完成搜索、下载与刮削。
 ---
 
 <script setup>

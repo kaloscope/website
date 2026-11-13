@@ -9,15 +9,15 @@ const previews = [
     name: '媒体首页',
     image: 'dashboard.png',
     alt: '首页按星期展示每日放送的番剧海报',
-    caption: '按放送日浏览番剧，选择想看的作品。',
+    caption: '按放送日翻看新番，挑一部想追的作品。',
     link: '/docs/websearch/',
     guide: '资源搜索'
   },
   {
     name: '工作流',
     image: 'workflow-complex.png',
-    alt: '电影元数据刮削工作流中的节点、参数和连线',
-    caption: '打开节点，查看每一步如何获取和整理元数据。',
+    alt: 'TMDB 元数据刮削工作流中的节点、参数和连线',
+    caption: '点开画布节点，抓站和刮削的每一步都清清楚楚。',
     link: '/docs/workflows/',
     guide: '工作流指南'
   },
@@ -25,7 +25,7 @@ const previews = [
     name: '全局搜索',
     image: 'websearch-global.png',
     alt: '全局搜索页按索引器分组列出匹配的资源和文件大小',
-    caption: '输入一次关键词，分站查看搜索结果。',
+    caption: '搜一次关键词，同时翻看多个站点的匹配结果。',
     link: '/docs/websearch/global',
     guide: '全局搜索指南'
   },
@@ -33,7 +33,7 @@ const previews = [
     name: '下载计划',
     image: 'download-plan.png',
     alt: '新增下载计划弹窗中可预览搜索结果，设置执行间隔和下载器',
-    caption: '预览命中的资源，设置搜索间隔和下载数量。',
+    caption: '先预览搜到的资源，再设好间隔和数量自动追更。',
     link: '/docs/downloads/plans',
     guide: '下载计划指南'
   },
@@ -41,7 +41,7 @@ const previews = [
     name: '弹幕播放',
     image: 'danmaku-settings.png',
     alt: '视频播放器上叠加弹幕，设置面板显示区域、透明度、字号和速度',
-    caption: '播放时调整弹幕的范围、字号和速度。',
+    caption: '看片时直接调整弹幕范围、字号、速度和屏蔽类型。',
     link: '/docs/medialibs/danmaku',
     guide: '弹幕设置'
   },
@@ -49,7 +49,7 @@ const previews = [
     name: '漫画阅读',
     image: 'image-viewer.png',
     alt: '漫画阅读器展示当前页，右侧可调整翻页方向和缩放方式',
-    caption: '切换滚动或翻页模式，下次从上次读到的位置继续。',
+    caption: '滚动或翻页随你选，阅读进度也会自动记下来。',
     link: '/docs/medialibs/reading',
     guide: '阅读指南'
   }
@@ -60,19 +60,19 @@ const preview = computed(() => previews[selected.value]);
 const guides = [
   {
     title: 'AI 与工作流',
-    detail: '用自然语言搭建索引器和刮削流程。在画布上检查节点、试运行，再发布。',
+    detail: '让助手帮你起草索引器和刮削流程，在画布上检查节点、试运行后再发布。',
     icon: 'document-flowchart',
     link: '/docs/ai/assistant'
   },
   {
     title: '影视与阅读',
-    detail: '为电影、剧集、小说和漫画补齐元数据，按自己的命名规则整理入库。',
+    detail: '电影、剧集、小说和漫画都能自动补齐元数据，按你的规则重命名整理入库。',
     icon: 'video-clip-multiple',
     link: '/docs/medialibs/'
   },
   {
     title: '部署到本地',
-    detail: '用 Docker 在 NAS 或家庭服务器上运行，按账号分配媒体库与索引器权限。',
+    detail: '用 Docker 跑在 NAS 或家用服务器上，再按账号分好媒体库和站点权限。',
     icon: 'desktop-arrow-down',
     link: '/docs/deployment'
   }
@@ -96,7 +96,7 @@ const guides = [
           <span class="wordmark"><img :src="withBase('/logo.svg')" alt="" width="64" height="64" />Kaloscope</span>
           <span class="title">用工作流整理<br /><em>你的媒体库</em></span>
         </h1>
-        <p class="lead">让 AI 帮你编排搜索、下载与刮削。在自己的服务器上看电影、追剧，也读小说和漫画。</p>
+        <p class="lead">搜索、下载和刮削，自己搭或让 AI 写都行。部署在自己的服务器上，电影、剧集、小说和漫画都能看。</p>
         <div class="actions">
           <VPButton theme="brand" href="https://hub.docker.com/r/kaloscope/kaloscope">
             立即部署<span v-if="release.version">&nbsp;{{ release.version }}</span>
@@ -236,7 +236,7 @@ const guides = [
 .lead {
   color: var(--vp-c-text-2);
   margin-top: 18px;
-  max-width: 25em;
+  max-width: 26em;
   font-size: clamp(16px, 1.35vw, 19px);
   line-height: 1.75;
 }

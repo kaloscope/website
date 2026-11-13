@@ -38,11 +38,11 @@ pnpm install --frozen-lockfile
 pnpm run dev
 ```
 
-4. 前后端均启动后，浏览器访问`http://localhost:5173/`即可进入应用界面，首次使用需创建管理员账号
+4. 前后端都启动后，浏览器打开 `http://localhost:5173/` 即可访问应用界面，首次使用同样需要创建管理员账号
 
 ### 项目结构
 
-```
+```text
 kaloscope/
 ├── frontend/
 │   ├── src/                    # 前端代码
@@ -82,23 +82,23 @@ kaloscope/
 
 ## 贡献指南
 
-模型提供商、助手和 MCP 的业务入口分别位于 `backend/app/services/ai.py`、`backend/app/services/assistant.py` 和 `backend/app/mcp.py`。扩展工具时应复用已有服务，并保留账号权限、只读与读写令牌的限制，以及变更预览和确认流程。
+AI 相关功能（模型提供商、内置助手和 MCP）的后端入口分别位于 `backend/app/services/ai.py`、`backend/app/services/assistant.py` 和 `backend/app/mcp.py`。如果想扩展新工具，请尽量复用现有 service 层逻辑，同时别绕开账号权限校验、只读/读写令牌限制以及「先预览再确认」的机制。
 
-欢迎通过 [GitHub](https://github.com/kaloscope/kaloscope) 提交 Issue 或 Pull Request。工作流模板请向 [workflows](https://github.com/kaloscope/workflows) 仓库提交。
+欢迎到 [GitHub](https://github.com/kaloscope/kaloscope) 提 Issue 或 Pull Request；如果是分享新的工作流模板，请直接向 [workflows](https://github.com/kaloscope/workflows) 仓库提交。
 
 ### 提交 Issue
 
-1. 提交前请先搜索现有 Issue，避免重复
-2. Bug 报告请说明复现步骤、预期行为与实际行为，并附上版本信息
+1. 提交前先搜一下现有 Issue，看看是不是已经有人报过
+2. 反馈 Bug 时尽量写清复现步骤、你期望的效果和实际现象，并附上当前版本号
 
 ### 提交 Pull Request
 
-1. 从`main`分支创建功能分支，分支名建议使用`feature/xxx`或`fix/xxx`格式
-2. 在分支上进行开发，完成后推送到你 Fork 的仓库
-3. 在 GitHub 上发起 Pull Request，合并目标选择主仓库的`main`分支
-4. PR 标题和描述请清晰说明改了什么、为什么这样改
-5. 每个 PR 应聚焦于单一功能或修复，保持改动范围小且专注，便于 Review
-6. 根据改动范围完成下面的检查，并在 PR 中说明实际结果；修改界面时附上截图
+1. 从 `main` 分支拉出新分支，分支名建议用 `feature/xxx` 或 `fix/xxx` 格式
+2. 改完推送到你 Fork 的仓库
+3. 在 GitHub 上发起 Pull Request，合并目标选主仓库的 `main` 分支
+4. PR 标题和描述请说清楚改了什么、为什么要这样改
+5. 每个 PR 尽量只解决一件事，改动小而专注会更容易 Review
+6. 按改动范围跑完下面的检查，并把实际结果写进 PR 描述里；改了前端界面记得贴上截图
 
 ### 检查与测试
 
@@ -119,8 +119,8 @@ poetry run ruff check .
 poetry run ruff format --check .
 ```
 
-局部后端修改可先运行相关测试文件；公共模型、共享基础设施和跨模块修改应运行完整测试集。前端目前没有 `test` 脚本，界面修改需结合实际页面交互验证。
+只改了后端某几个模块时，可以先只跑相关的测试文件；涉及公共数据模型、底层基础设施或跨模块改动，则请跑一遍完整测试集。前端目前没有单独的 `test` 脚本，界面修改记得结合实际页面交互确认。
 
-仓库使用 prek 管理 Git hooks，可在 `backend` 目录执行 `poetry run prek install`。钩子沿用根目录的 `.pre-commit-config.yaml`，可能格式化文件或更新锁文件，运行后应检查差异。仅修改文档时，核对路径、命令和说明，并执行 `git diff --check` 即可。
+仓库用 prek 管理 Git hooks，在 `backend` 目录执行 `poetry run prek install` 即可安装。提交前钩子会按根目录的 `.pre-commit-config.yaml` 运行检查，必要时可能会格式化文件或更新锁文件，记得留意提交前的 diff；如果只是改改文档，核对好路径、命令和说明，再跑一下 `git diff --check` 就行。
 
-开发和验证请使用独立的 `workspace`。启动完整后端会自动迁移数据库，并开启下载同步和媒体库监控，不应直接使用实际媒体库与下载任务的数据进行测试。
+另外提醒一下，本地开发和测试请务必使用独立的 `workspace` 目录。启动完整后端时会自动跑数据库迁移，并开启下载同步和媒体库监控，不要直接拿正在使用的媒体库和下载任务数据来做测试。
