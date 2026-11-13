@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: Kaloscope
-  text: 以可视化工作流驱动的媒体库管理工具
-  tagline: 自由编排搜索、刮削与下载逻辑，打造完全可控的本地媒体库。
+  text: AI 与可视化工作流驱动的媒体库管理工具
+  tagline: 用自然语言编排搜索、刮削与下载，在画布上掌控流程，管理影视、小说与漫画。
   image:
     src: /logo.svg
     alt: Kaloscope
@@ -21,13 +21,13 @@ features:
   - icon:
       dark: /fluent--document-flowchart-dark.svg
       light: /fluent--document-flowchart-light.svg
-    title: 工作流驱动
-    details: 拖拽编排 HTTP 请求、脚本等节点，灵活对接任意资源站与元数据来源，流程可编辑、可复用。
+    title: AI 与工作流
+    details: 通过助手或拖拽节点编排流程，实时检查画布修改；支持 AI 节点与 MCP 外部接入，发布由你决定。
   - icon:
       dark: /fluent--video-clip-multiple-dark.svg
       light: /fluent--video-clip-multiple-light.svg
     title: 媒体库管理
-    details: 扫描并刮削 NFO 元数据，按模板整理目录与文件名，支持弹幕、字幕、转码播放与自动追更。
+    details: 管理电影、电视剧、小说和漫画，刮削元数据并按模板整理，支持在线播放、在线阅读、进度续接与自动追更。
   - icon:
       dark: /fluent--desktop-arrow-down-dark.svg
       light: /fluent--desktop-arrow-down-light.svg

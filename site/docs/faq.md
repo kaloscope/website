@@ -47,10 +47,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=Asia/Shanghai
-      - WATCHTOWER_CLEANUP=true           # 更新后删除旧镜像
-      - WATCHTOWER_POLL_INTERVAL=86400    # 检查间隔（秒）
-      - WATCHTOWER_LABEL_ENABLE=true      # 仅更新带有启用标签的容器
-      - DOCKER_API_VERSION=1.44           # 可选：指定 Docker API 版本
+      - WATCHTOWER_CLEANUP=true # 更新后删除旧镜像
+      - WATCHTOWER_POLL_INTERVAL=86400 # 检查间隔（秒）
+      - WATCHTOWER_LABEL_ENABLE=true # 仅更新带有启用标签的容器
+      - DOCKER_API_VERSION=1.44 # 可选：指定 Docker API 版本
     restart: unless-stopped
 ```
 
@@ -140,7 +140,7 @@ methods:
 
 <br>
 
-会。「启动时全量扫描」只控制重启时是否扫描全部文件，不关闭运行期间的实时监控。创建媒体库时也始终会扫描一次。服务停止期间增删媒体文件或修改 NFO 后，需要下次启动扫描或[手动扫描](./medialibs/#扫描与实时监控)才能补齐。
+会。「启动时全量扫描」只控制重启时是否扫描全部文件，不关闭运行期间的实时监控。创建媒体库时也始终会扫描一次。服务停止期间增删媒体文件或修改 NFO、OPF、ComicInfo 后，需要下次启动扫描或[手动扫描](./medialibs/#扫描与实时监控)才能补齐。
 
 管理员可以在媒体库管理页执行扫描，也可以点击媒体库侧栏名称右侧的扫描按钮。扫描完成后，后台刮削与整理可能还在继续。
 
@@ -151,7 +151,7 @@ methods:
 
 <br>
 
-保存模板不会立即整理全部旧文件。自动整理由入库和 NFO 处理触发；已有条目可重新刮削，或更新 NFO 后等待处理。扫描不会强制重处理未变化的 NFO。
+保存模板不会立即整理全部旧文件。自动整理由入库和元数据处理触发；已有条目可重新刮削，或更新对应的 NFO、OPF 或 ComicInfo 后等待处理。扫描不会强制重处理未变化的元数据。
 
 如果仍未整理，检查所需 NFO 字段是否齐全、目标路径是否冲突，以及是否属于暂不支持自动整理的多分段电影。具体规则和示例见[自动整理](./medialibs/organization)。
 
@@ -165,5 +165,36 @@ methods:
 管理员可进入**设置 → 系统监控 → 系统日志**查看实时日志，按日志级别筛选，或点击「跟随」定位到最新记录。定位扫描、自动整理、下载转移和转码失败时，可结合媒体路径与报错时间查找原因。
 
 如果涉及工作流刮削或定时任务，还应查看对应工作流的执行日志；转码任务状态可在[系统监控 → 转码任务](./medialibs/transcode#转码任务)中查看。
+
+</details>
+
+<details class="faq-item">
+<summary>10. 没有配置 AI，还能正常使用吗</summary>
+
+<br>
+
+可以。AI 是可选功能，原有工作流、搜索、下载、播放和阅读不依赖模型服务。需要启用时，管理员在[模型提供商](./ai/)中添加连接，再选择模型打开助手或配置 AI 节点。外部 MCP 客户端使用独立访问令牌，无需配置内置模型。
+
+</details>
+
+<details class="faq-item">
+<summary>11. 测试连接成功，为什么助手或 AI 节点仍报错</summary>
+
+<br>
+
+「测试连接」检查的是模型列表接口。实际调用还取决于模型 ID、调用权限和接口能力：助手需要工具调用，开启原生 JSON 结构约束需要模型服务支持对应参数。当前调用使用 OpenAI 兼容 Chat Completions 接口，仅提供其他原生协议的地址不能直接调用。
+
+Docker 中的 `127.0.0.1` 指向容器自身；连接宿主机的 Ollama 或 LM Studio 时，请使用容器可访问的地址。配置与排错见[模型提供商](./ai/)。
+
+</details>
+
+<details class="faq-item">
+<summary>12. 小说或漫画没有出现，或提示内容未就绪</summary>
+
+<br>
+
+先核对[目录要求](./medialibs/reading#支持格式与目录)：小说每个作品目录只能有一个 TXT 或 EPUB；漫画每个阅读单元应使用图片或单个 CBZ/ZIP，不能把正文直接堆在媒体库根目录。新文件需要在稳定后建立索引，请等待后台处理；仍有问题时手动扫描并查看系统日志。
+
+小说使用 OPF，漫画使用 ComicInfo，影视库的 NFO 规则不适用于阅读元数据。文件内容变更后，旧阅读位置可能失效，阅读器会提示并从可用章节继续。
 
 </details>

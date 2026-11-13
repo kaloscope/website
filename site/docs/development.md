@@ -67,9 +67,10 @@ kaloscope/
 │       ├── migrations/         # 数据库迁移
 │       ├── utils/              # 工具函数
 │       └── core/               # 核心模块
+│           ├── ai/             # 模型调用、工具与工作流草稿支持
 │           ├── dl/             # 下载器适配
 │           ├── flow/           # 工作流引擎
-│           ├── media/          # 扫描、入库与自动整理
+│           ├── media/          # 影视与阅读媒体的扫描、入库、索引和整理
 │           └── transcode/      # 转码与能力探测
 └── workspace/                  # 运行时数据
     ├── database/               # 数据库
@@ -80,6 +81,8 @@ kaloscope/
 ```
 
 ## 贡献指南
+
+模型提供商、助手和 MCP 的业务入口分别位于 `backend/app/services/ai.py`、`backend/app/services/assistant.py` 和 `backend/app/mcp.py`。扩展工具时应复用已有服务，并保留账号权限、只读与读写令牌的限制，以及变更预览和确认流程。
 
 欢迎通过 [GitHub](https://github.com/kaloscope/kaloscope) 提交 Issue 或 Pull Request。工作流模板请向 [workflows](https://github.com/kaloscope/workflows) 仓库提交。
 

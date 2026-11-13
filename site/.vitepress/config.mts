@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Kaloscope',
-  description: '以可视化工作流驱动的本地媒体库管理工具',
+  description: 'AI 与可视化工作流驱动的本地媒体库管理工具',
   cleanUrls: true,
   lastUpdated: true,
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
@@ -35,11 +35,21 @@ export default defineConfig({
         text: '功能说明',
         items: [
           {
+            text: 'AI 与外部接入',
+            link: '/docs/ai/',
+            items: [
+              { text: '模型提供商', link: '/docs/ai/' },
+              { text: 'AI 助手', link: '/docs/ai/assistant' },
+              { text: 'MCP 接入', link: '/docs/ai/mcp' }
+            ]
+          },
+          {
             text: '工作流',
             link: '/docs/workflows/',
             items: [
               { text: '流程模板', link: '/docs/workflows/templates' },
               { text: '全局变量', link: '/docs/workflows/variables' },
+              { text: 'AI 节点', link: '/docs/workflows/ai' },
               { text: '定时调度', link: '/docs/workflows/schedule' }
             ]
           },
@@ -57,6 +67,7 @@ export default defineConfig({
             text: '媒体库',
             link: '/docs/medialibs/',
             items: [
+              { text: '小说与漫画', link: '/docs/medialibs/reading' },
               { text: '自动整理', link: '/docs/medialibs/organization' },
               { text: '弹幕设置', link: '/docs/medialibs/danmaku' },
               { text: '转码设置', link: '/docs/medialibs/transcode' }
