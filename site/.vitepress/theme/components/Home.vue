@@ -62,19 +62,22 @@ const guides = [
     title: 'AI 与工作流',
     detail: '让助手帮你起草索引器和刮削流程，在画布上检查节点、试运行后再发布。',
     icon: 'document-flowchart',
-    link: '/docs/ai/assistant'
+    link: '/docs/ai/assistant',
+    tone: 'violet'
   },
   {
     title: '影视与阅读',
     detail: '电影、剧集、小说和漫画都能自动补齐元数据，按你的规则重命名整理入库。',
     icon: 'video-clip-multiple',
-    link: '/docs/medialibs/'
+    link: '/docs/medialibs/',
+    tone: 'amber'
   },
   {
     title: '部署到本地',
     detail: '用 Docker 跑在 NAS 或家用服务器上，再按账号分好媒体库和站点权限。',
     icon: 'desktop-arrow-down',
-    link: '/docs/deployment'
+    link: '/docs/deployment',
+    tone: 'green'
   }
 ];
 </script>
@@ -82,6 +85,7 @@ const guides = [
 <template>
   <div class="home">
     <section class="hero" aria-labelledby="home-title">
+      <div class="glow" aria-hidden="true"></div>
       <div class="prism" aria-hidden="true">
         <svg viewBox="-100 -100 200 200" :style="{ transform: 'rotate(' + selected * 22.5 + 'deg)' }">
           <g v-for="sector in 8" :key="sector" :transform="'rotate(' + sector * 45 + ')'">
@@ -135,25 +139,24 @@ const guides = [
     </section>
 
     <nav class="guide-list" aria-labelledby="guides-heading">
-      <h2 id="guides-heading">功能指南</h2>
-      <a v-for="guide in guides" :key="guide.link" class="guide" :href="withBase(guide.link)">
-        <span class="guide-top">
-          <img
-            class="icon-light"
-            :src="withBase('/fluent--' + guide.icon + '-light.svg')"
-            width="32"
-            height="32"
-            alt=""
-          />
-          <img
-            class="icon-dark"
-            :src="withBase('/fluent--' + guide.icon + '-dark.svg')"
-            width="32"
-            height="32"
-            alt=""
-          />
-          <span class="guide-arrow" aria-hidden="true">↗</span>
+      <div class="guide-head">
+        <h2 id="guides-heading">功能指南</h2>
+        <a class="guide-all" :href="withBase('/docs/introduction')">浏览全部文档 <span aria-hidden="true">→</span></a>
+      </div>
+      <a
+        v-for="guide in guides"
+        :key="guide.link"
+        class="guide"
+        :class="'tone-' + guide.tone"
+        :href="withBase(guide.link)"
+      >
+        <span class="guide-icon" aria-hidden="true">
+          <span
+            class="guide-glyph"
+            :style="{ '--icon': 'url(' + withBase('/fluent--' + guide.icon + '-light.svg') + ')' }"
+          ></span>
         </span>
+        <span class="guide-arrow" aria-hidden="true">↗</span>
         <span class="guide-title">{{ guide.title }}</span>
         <span class="guide-detail">{{ guide.detail }}</span>
       </a>
@@ -163,27 +166,43 @@ const guides = [
 
 <style scoped>
 .home {
-  --ink: #302341;
+  /* palette sampled from the logo blocks */
+  --k-blue: #5170ff;
+  --k-violet: #8b4fd8;
+  --k-magenta: #cb6ce6;
+  --k-orange: #ff914d;
+  --k-yellow: #ffde59;
+  --k-green: #00bf63;
+
+  --ink: #251b36;
   --accent: #643aa0;
-  --wash: #f3effa;
-  --rule: #d8cee5;
-  --facet-a: #dfd2f2;
-  --facet-b: #d0bee9;
-  --facet-c: #eadff5;
+  --wash: #f6f2fc;
+  --surface: #ffffff;
+  --rule: #e4dbef;
+  --facet-a: #e6dbf6;
+  --facet-b: #d9c8ef;
+  --facet-c: #efe6f9;
+  --glow-strength: 30%;
+  --shadow: 0 1px 2px rgb(48 30 80 / 0.06), 0 8px 24px -12px rgb(48 30 80 / 0.22);
   color: var(--ink);
   max-width: 1456px;
   margin-inline: auto;
-  padding: clamp(20px, 3vw, 48px) clamp(16px, 3.5vw, 56px) 0;
+  padding: clamp(20px, 3vw, 48px) clamp(16px, 3.5vw, 56px) clamp(56px, 6vw, 96px);
 }
 .dark .home {
   --ink: #f2eafa;
   --accent: #c5a3f9;
-  --wash: #251f30;
-  --rule: #493c58;
-  --facet-a: #392d48;
-  --facet-b: #493658;
-  --facet-c: #34293f;
+  --wash: #1d1828;
+  --surface: #221c2e;
+  --rule: #3a3049;
+  --facet-a: #2f2540;
+  --facet-b: #3b2d4f;
+  --facet-c: #2a2138;
+  --glow-strength: 22%;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.7);
 }
+
+/* hero */
 .hero {
   position: relative;
   isolation: isolate;
@@ -194,14 +213,54 @@ const guides = [
   gap: clamp(28px, 3.4vw, 50px);
   padding: clamp(32px, 4.3vw, 72px);
   background: var(--wash);
-  border-radius: 18px;
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+}
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      42% 60% at 0% 0%,
+      color-mix(in srgb, var(--k-blue) var(--glow-strength), transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      36% 50% at 8% 100%,
+      color-mix(in srgb, var(--k-orange) calc(var(--glow-strength) * 0.7), transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 70% at 78% 40%,
+      color-mix(in srgb, var(--k-magenta) var(--glow-strength), transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      30% 40% at 100% 100%,
+      color-mix(in srgb, var(--k-green) calc(var(--glow-strength) * 0.5), transparent),
+      transparent 70%
+    );
+}
+.glow::after {
+  /* faint dot grid that fades toward the text column */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(105deg, transparent 30%, #000 75%);
+  opacity: 0.55;
 }
 .prism {
   position: absolute;
   z-index: -1;
-  right: -8%;
-  top: -35%;
-  width: 57%;
+  right: 4%;
+  top: 50%;
+  width: min(54%, 720px);
+  translate: 0 -50%;
+  opacity: 0.7;
   pointer-events: none;
 }
 .prism svg {
@@ -211,8 +270,8 @@ const guides = [
 .wordmark {
   display: inline-flex;
   align-items: center;
-  gap: 0.2em;
-  font-size: clamp(28px, 2.6vw, 40px);
+  gap: 0.24em;
+  font-size: clamp(26px, 2.4vw, 36px);
   line-height: 1;
   font-weight: 750;
   letter-spacing: -0.035em;
@@ -223,35 +282,60 @@ const guides = [
 }
 .title {
   display: block;
-  margin-top: clamp(16px, 1.8vw, 28px);
+  margin-top: clamp(18px, 2vw, 30px);
   font-size: clamp(42px, 4.5vw, 70px);
-  line-height: 1.15;
-  font-weight: 750;
+  line-height: 1.14;
+  font-weight: 800;
   letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 .title em {
   font-style: normal;
   color: var(--accent);
+  background: linear-gradient(100deg, var(--k-blue) 0%, var(--k-violet) 45%, var(--k-magenta) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dark .title em {
+  background-image: linear-gradient(100deg, #8ea0ff 0%, #b58cf5 45%, #e7a0f6 100%);
 }
 .lead {
   color: var(--vp-c-text-2);
-  margin-top: 18px;
+  margin-top: 20px;
   max-width: 26em;
   font-size: clamp(16px, 1.35vw, 19px);
   line-height: 1.75;
+  text-wrap: pretty;
 }
 .actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 30px;
   flex-wrap: wrap;
   --vp-button-brand-bg: #643aa0;
   --vp-button-brand-hover-bg: #512e83;
   --vp-button-brand-active-bg: #44266e;
-  --vp-button-alt-bg: var(--vp-c-bg);
+  --vp-button-alt-bg: var(--surface);
+  --vp-button-alt-border: var(--rule);
+  --vp-button-alt-hover-border: var(--rule);
   --vp-button-alt-text: var(--ink);
 }
+.actions :deep(.VPButton) {
+  border-radius: 12px;
+  padding: 0 22px;
+  line-height: 44px;
+  font-size: 15px;
+}
+.actions :deep(.VPButton.brand) {
+  box-shadow: 0 8px 20px -8px rgb(100 58 160 / 0.7);
+}
+.actions :deep(.VPButton.alt) {
+  box-shadow: var(--shadow);
+}
+
+/* preview */
 .showcase {
   container-type: inline-size;
   margin: 0;
@@ -260,53 +344,39 @@ const guides = [
 .preview-controls {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  column-gap: 12px;
-  align-items: center;
-  margin: 0 2% 6px;
+  gap: 4px;
+  margin: 0 2.4% 8px;
+  padding: 4px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .preview-controls button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
   color: var(--vp-c-text-2);
   font-size: 14px;
   font-weight: 600;
-  min-height: 44px;
-  padding: 0;
+  min-height: 38px;
+  padding: 0 6px;
+  border-radius: 10px;
   white-space: nowrap;
+  transition:
+    color 0.2s,
+    background-color 0.2s,
+    box-shadow 0.2s;
 }
-.preview-controls button::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
-  background: var(--wash);
-}
-.preview-controls button + button::after {
-  content: '';
-  position: absolute;
-  left: -12px;
-  top: 50%;
-  width: 12px;
-  height: 1px;
-  background: var(--rule);
-}
-.preview-controls button[aria-pressed='true'],
 .preview-controls button:hover {
   color: var(--accent);
 }
-.preview-controls button[aria-pressed='true']::before {
-  background: var(--accent);
+.preview-controls button[aria-pressed='true'] {
+  color: var(--accent);
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 @container (max-width: 36rem) {
   .preview-controls {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .preview-controls button:nth-child(3n + 1)::after {
-    display: none;
   }
 }
 .screen {
@@ -320,7 +390,7 @@ const guides = [
   object-fit: contain;
 }
 figcaption {
-  padding: 2px 2% 0;
+  padding: 2px 2.4% 0;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -329,104 +399,145 @@ figcaption {
   font-size: 14px;
   line-height: 1.65;
 }
-figcaption a {
+figcaption a,
+.guide-all {
   color: var(--accent);
   font-weight: 600;
   white-space: nowrap;
 }
-figcaption a:hover {
+figcaption a:hover,
+.guide-all:hover {
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
+
+/* guides */
 .guide-list {
-  margin: clamp(28px, 3vw, 48px) clamp(0px, 2vw, 32px) 0;
+  margin-top: clamp(40px, 4.5vw, 72px);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(18px, 3vw, 48px);
+  gap: clamp(14px, 1.6vw, 24px);
 }
-.guide-list h2 {
+.guide-head {
   grid-column: 1/-1;
-  margin-bottom: 14px;
-  font-size: 21px;
-  font-weight: 650;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
+  padding-inline: 4px;
+}
+.guide-head h2 {
+  font-size: clamp(22px, 1.8vw, 26px);
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
+.guide-all {
+  font-size: 14px;
+}
 .guide {
+  --tone: var(--k-violet);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 24px 26px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 18px;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+}
+.guide.tone-amber {
+  --tone: #f07a2c;
+}
+.guide.tone-green {
+  --tone: #00a656;
+}
+.dark .guide {
+  --tone: #b58cf5;
+}
+.dark .guide.tone-amber {
+  --tone: #ffad73;
+}
+.dark .guide.tone-green {
+  --tone: #4fd892;
+}
+.guide-icon {
   display: grid;
-  grid-template-columns: 30px 1fr;
-  gap: 6px 12px;
-  align-content: start;
-  border-top: 1px solid var(--rule);
-  padding: 18px 25px 8px 0;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 8px;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--tone) 13%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 22%, transparent);
 }
-.guide-top {
-  grid-row: span 2;
-}
-.guide-top img {
-  width: 28px;
-  height: 28px;
+.guide-glyph {
+  width: 26px;
+  height: 26px;
+  background: var(--tone);
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
 }
 .guide-arrow {
   position: absolute;
-  right: 0;
-  top: 18px;
-  color: var(--accent);
+  right: 22px;
+  top: 22px;
+  color: var(--vp-c-text-3);
+  transition:
+    color 0.25s,
+    translate 0.25s;
 }
 .guide-title {
   font-size: 18px;
   line-height: 1.45;
-  font-weight: 650;
+  font-weight: 700;
 }
 .guide-detail {
   color: var(--vp-c-text-2);
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.7;
 }
-.guide:hover .guide-title {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.guide:hover {
+  border-color: color-mix(in srgb, var(--tone) 45%, var(--rule));
+  box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--tone) 70%, transparent);
 }
-.icon-dark,
-.dark .icon-light {
-  display: none;
-}
-.dark .icon-dark {
-  display: block;
+.guide:hover .guide-arrow {
+  color: var(--tone);
+  translate: 2px -2px;
 }
 .home :is(button, a):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+/* motion */
 @media (prefers-reduced-motion: no-preference) {
   .prism svg {
     transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   .screen img {
-    animation: reveal 320ms ease-out;
+    animation: reveal 360ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .preview-controls button[aria-pressed='true']::before {
-    animation: connect 420ms ease-out;
+  .guide:hover {
+    transform: translateY(-3px);
   }
   @keyframes reveal {
     from {
-      opacity: 0.65;
-      transform: translateY(5px);
-    }
-  }
-  @keyframes connect {
-    from {
-      box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 26%, transparent);
-    }
-    to {
-      box-shadow: 0 0 0 0 transparent;
+      opacity: 0.5;
+      transform: translateY(6px) scale(0.995);
     }
   }
 }
+
+/* responsive */
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 28px;
   }
   .title br {
     display: none;
@@ -439,21 +550,25 @@ figcaption a:hover {
     justify-self: center;
   }
   .prism {
-    width: 62%;
-    right: -16%;
-    top: -10%;
+    width: 70%;
+    right: -14%;
+    top: 68%;
+  }
+  .guide-list {
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 640px) {
   .home {
-    padding: 12px 12px 0;
+    padding: 12px 12px 48px;
   }
   .hero {
-    padding: 26px 18px 20px;
-    gap: 20px;
+    padding: 28px 16px 20px;
+    gap: 22px;
+    border-radius: 20px;
   }
   .wordmark {
-    font-size: 30px;
+    font-size: 28px;
   }
   .title {
     font-size: clamp(32px, 8.4vw, 44px);
@@ -462,41 +577,42 @@ figcaption a:hover {
     display: initial;
   }
   .lead {
-    margin-top: 12px;
+    margin-top: 14px;
   }
   .actions {
-    margin-top: 18px;
+    margin-top: 22px;
   }
   .prism {
-    width: 83%;
-    top: -9%;
-    right: -32%;
+    width: 100%;
+    right: -30%;
   }
   .preview-controls {
-    margin: 0;
+    margin: 0 0 6px;
   }
   .preview-controls button {
-    padding: 0 4px;
     font-size: 13px;
-  }
-  .preview-controls button + button::after {
-    left: -12px;
-    width: 10px;
   }
   figcaption {
     flex-wrap: wrap;
     gap: 3px 12px;
     font-size: 13px;
   }
-  .guide-list {
-    grid-template-columns: 1fr;
-    margin-inline: 10px;
-  }
   .guide {
-    padding-block: 16px;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 4px 14px;
+    padding: 18px 18px 20px;
   }
-  .guide-list h2 {
-    margin-bottom: 10px;
+  .guide-icon {
+    grid-row: span 2;
+    margin-bottom: 0;
+  }
+  .guide-title {
+    padding-right: 20px;
+  }
+  .guide-arrow {
+    right: 16px;
+    top: 18px;
   }
 }
 </style>
