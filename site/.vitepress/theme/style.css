@@ -87,56 +87,6 @@
 }
 
 /**
- * Component: Home
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #d386f7 30%, #0e33d6);
-
-  --vp-home-hero-image-background-image: linear-gradient(-45deg, #e1aef8 50%, #97c4f6 50%);
-  --vp-home-hero-image-filter: blur(44px);
-}
-
-@media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(56px);
-  }
-}
-
-@media (min-width: 960px) {
-  :root {
-    --vp-home-hero-image-filter: blur(68px);
-  }
-
-  .VPHero .image-src {
-    max-width: 300px;
-    max-height: 300px;
-  }
-}
-
-/**
- * Component: Feature Card
- * -------------------------------------------------------------------------- */
-
-.VPFeature .box {
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-.VPFeature .box .VPImage {
-  margin-bottom: 0 !important;
-  width: 32px;
-  height: 32px;
-}
-
-.VPFeature .box .title {
-  flex: 1;
-}
-
-/**
  * Component: Custom Block
  * -------------------------------------------------------------------------- */
 
