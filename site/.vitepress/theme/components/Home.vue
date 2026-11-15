@@ -7,19 +7,19 @@ import { data as release } from '../../data/release.data';
 const previews = [
   {
     name: '媒体首页',
-    image: 'dashboard.png',
+    image: 'dashboard.webp',
     alt: '首页按星期展示每日放送的番剧海报',
     caption: '按放送日翻看新番，挑一部想追的作品。',
     link: '/docs/websearch/',
     guide: '资源搜索'
   },
   {
-    name: '工作流',
-    image: 'workflow-complex.png',
-    alt: 'TMDB 元数据刮削工作流中的节点、参数和连线',
-    caption: '点开画布节点，抓站和刮削的每一步都清清楚楚。',
-    link: '/docs/workflows/',
-    guide: '工作流指南'
+    name: 'AI 助手',
+    image: 'ai-assistant.png',
+    alt: 'AI 助手根据中文要求修改工作流，画布同步展示修改结果',
+    caption: '告诉助手想改什么，在画布上检查结果，再保存草稿。',
+    link: '/docs/ai/assistant',
+    guide: '助手使用指南'
   },
   {
     name: '全局搜索',

@@ -2,6 +2,8 @@
 
 从 **v1.0.0** 开始，Kaloscope 支持统一接入云端或本地大模型，供[内置助手](./assistant)和工作流中的 [AI 节点](../workflows/ai)调用。如果不打算用 AI，现有的搜索、下载、媒体库和工作流功能照常可用，不受影响。
 
+<img src="/screenshots/ai-providers.png" alt="DeepSeek 模型提供商配置，API Key 保持隐藏" width="1382" height="849">
+
 ## 添加提供商
 
 管理员可以在 **设置 → 系统设置 → 模型提供商** 中选择常见预设，或选「自定义提供商」手动填写连接信息：
